@@ -27,37 +27,58 @@ class _PageRiparazioniState extends State<RiparazionePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> items = ['pinco', 'pallino', 'giordano'];
     return Scaffold(
-      drawer: const DrawerCustom(),
+      drawer: const DrawerCustomWidget(),
       appBar: AppBar(),
       body: Column(children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Expanded(
-              flex: 1,
+              //flex: 1,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text('INSERT')),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/ins_mod_repair');
+                    },
+                    child: const Text('INSERT')),
               ),
             ),
           ],
         ),
         Row(children: [
           Expanded(
-            child: Form(
-              child: Column(
-                children: [
-                  TextField(),
-                  TextField(),
-                  TextField(),
-                ],
+              flex: 2,
+              child: Card(child: DataTableRepairWidget(context: context))),
+          Expanded(
+            child: Card(
+              child: Form(
+                child: Column(
+                  children: [
+                    //EasyAutocomplete(),
+                    // EasyAutocomplete(),
+                    BlocBuilder<ClientsBloc, ClientsState>(
+                        builder: (context, state) {
+                      if (state is ClientsLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        final clients = (state as ClientsLoaded).clients;
+                        return EasyAutocomplete(
+                          suggestions: clients.map((e) => e.name).toList(),
+                          onChanged: (value) {
+                            print('onChange Value: $value');
+                          },
+                        );
+                      }
+                    })
+                  ],
+                ),
               ),
             ),
           ),
-          Expanded(flex: 2, child: DataTableRepairWidget(context: context)),
         ])
       ]),
     );
