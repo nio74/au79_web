@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       child: Scaffold(
           appBar: AppBar(),
-          drawer: const DrawerCustom(),
+          drawer: const DrawerCustomWidget(),
           body:
               Container() /* DefaultTabController(
             length: 6,

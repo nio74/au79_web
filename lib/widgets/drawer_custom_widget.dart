@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DrawerCustom extends StatelessWidget {
-  const DrawerCustom({
+class DrawerCustomWidget extends StatelessWidget {
+  const DrawerCustomWidget({
     Key? key,
   }) : super(key: key);
 

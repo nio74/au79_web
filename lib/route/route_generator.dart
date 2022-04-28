@@ -1,6 +1,7 @@
 import 'package:au79_web/page/home_page.dart';
 import 'package:au79_web/page/impostazioni_page.dart';
-import 'package:au79_web/page/riparazioni_page.dart';
+import 'package:au79_web/page/ins_mod_repair.dart';
+import 'package:au79_web/page/repairs_pages.dart';
 import 'package:flutter/material.dart';
 
 class RouteGeneretor {
@@ -14,6 +15,8 @@ class RouteGeneretor {
         return MaterialPageRoute(builder: (_) => RiparazionePage());
       case '/impostazioni':
         return MaterialPageRoute(builder: (_) => const ImpostazioniPage());
+      case '/ins_mod_repair':
+        return MaterialPageRoute(builder: (_) => InsModRepair());
 
       /* case '/edit_employee':
         if (args is int) {
