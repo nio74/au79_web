@@ -7,6 +7,7 @@ import 'package:au79_web/themes/dark_theme.dart';
 import 'package:au79_web/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:ui';
 
 void main() {
   runApp(MultiBlocProvider(providers: [

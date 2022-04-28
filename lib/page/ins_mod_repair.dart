@@ -48,6 +48,28 @@ class EasyAutocompleteWidget extends StatelessWidget {
         } else {
           final clients = (state as ClientsLoaded).clients;
           return EasyAutocomplete(
+              decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                          color: Color.fromARGB(255, 39, 60, 176),
+                          style: BorderStyle.solid)),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                          color: Color.fromARGB(255, 39, 71, 176),
+                          style: BorderStyle.solid))),
+              suggestionBuilder: (data) {
+                return Container(
+                    margin: EdgeInsets.all(1),
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 39, 87, 176),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Text(data, style: TextStyle(color: Colors.white)));
+              },
               suggestions: clients.map((e) => e.name).toList(),
               onChanged: (value) {
                 print('onChange Value: $value');
