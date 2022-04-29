@@ -67,7 +67,8 @@ class _PageRiparazioniState extends State<RiparazionePage> {
                       } else {
                         final clients = (state as ClientsLoaded).clients;
                         return EasyAutocomplete(
-                          suggestions: clients.map((e) => e.name).toList(),
+                          suggestions:
+                              clients.map((e) => e.nameClient).toList(),
                           onChanged: (value) {
                             print('onChange Value: $value');
                           },

@@ -1,4 +1,5 @@
 import 'package:au79_web/blocs/clients/clients_bloc.dart';
+import 'package:au79_web/widgets/custom_text_form_field.dart';
 import 'package:au79_web/widgets/drawer_custom_widget.dart';
 import 'package:easy_autocomplete/easy_autocomplete.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,16 @@ class InsModRepair extends StatefulWidget {
 }
 
 class _InsModRepairState extends State<InsModRepair> {
+  final _objectController = TextEditingController();
+  final _workTodoController = TextEditingController();
+
+  @override
+  void dispose() {
+    _objectController.dispose();
+    _workTodoController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +33,15 @@ class _InsModRepairState extends State<InsModRepair> {
           Row(children: [
             Expanded(
               child: Card(
-                child: EasyAutocompleteWidget(),
+                child: Column(
+                  children: [
+                    EasyAutocompleteWidget(),
+                    CustomTextFormField(
+                        controller: _objectController, txtLable: 'Object'),
+                    CustomTextFormField(
+                        controller: _workTodoController, txtLable: 'Work to do')
+                  ],
+                ),
               ),
             )
           ])
@@ -49,28 +68,30 @@ class EasyAutocompleteWidget extends StatelessWidget {
           final clients = (state as ClientsLoaded).clients;
           return EasyAutocomplete(
               decoration: InputDecoration(
+                  label: Text('Inserire nome Cliente'),
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide(
-                          color: Color.fromARGB(255, 39, 60, 176),
+                          color: Theme.of(context).primaryColor,
                           style: BorderStyle.solid)),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide(
-                          color: Color.fromARGB(255, 39, 71, 176),
+                          color: Theme.of(context).primaryColor,
                           style: BorderStyle.solid))),
               suggestionBuilder: (data) {
                 return Container(
                     margin: EdgeInsets.all(1),
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 39, 87, 176),
+                        color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(5)),
-                    child: Text(data, style: TextStyle(color: Colors.white)));
+                    child: Text(data,
+                        style: Theme.of(context).textTheme.headline3));
               },
-              suggestions: clients.map((e) => e.name).toList(),
+              suggestions: clients.map((e) => e.nameClient).toList(),
               onChanged: (value) {
                 print('onChange Value: $value');
               });

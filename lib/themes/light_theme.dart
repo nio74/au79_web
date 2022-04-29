@@ -9,6 +9,7 @@ var lightThemeData = ThemeData(
       primary: Color(0xff416ff4), secondary: Color(0xFFe84545)),
   backgroundColor: const Color(0xFFFFFFFF),
   fontFamily: 'Futura',
+
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
         primary: Colors.green,
@@ -16,6 +17,7 @@ var lightThemeData = ThemeData(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))),
   ),
+
   textTheme: const TextTheme(
     headline1: TextStyle(
       color: Color(0xFF2b2e4a),

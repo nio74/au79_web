@@ -3,40 +3,40 @@ import 'package:equatable/equatable.dart';
 class ClientModel extends Equatable {
   final int id;
   final String surname;
-  final String name;
-  final String indirizzo;
+  final String nameClient;
+  final String address;
 
   const ClientModel({
     required this.id,
     required this.surname,
-    required this.name,
-    required this.indirizzo,
+    required this.nameClient,
+    required this.address,
   });
 
   @override
-  List<Object?> get props => [id, surname, name, indirizzo];
+  List<Object?> get props => [id, surname, nameClient, address];
 
   ClientModel copyWith({
     int? id,
     String? surname,
-    String? name,
-    String? indirizzo,
+    String? nameClient,
+    String? address,
   }) {
     return ClientModel(
       id: id ?? this.id,
       surname: surname ?? this.surname,
-      name: name ?? this.name,
-      indirizzo: indirizzo ?? this.indirizzo,
+      nameClient: nameClient ?? this.nameClient,
+      address: address ?? this.address,
     );
   }
 }
 
 final clientsList = [
   ClientModel(
-      id: 1, surname: 'Roggi', name: "Antonio", indirizzo: "Via Roma 94"),
+      id: 1, surname: 'Roggi', nameClient: "Antonio", address: "Via Roma 94"),
   ClientModel(
       id: 2,
       surname: 'Buoncompagni',
-      name: "Giovanni",
-      indirizzo: "Via pinco 37 Verona"),
+      nameClient: "Giovanni",
+      address: "Via pinco 37 Verona"),
 ];
