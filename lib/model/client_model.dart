@@ -1,30 +1,35 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class ClientModel extends Equatable {
   final int id;
-  final String surname;
   final String nameClient;
   final String address;
 
   const ClientModel({
     required this.id,
-    required this.surname,
     required this.nameClient,
     required this.address,
   });
 
   @override
-  List<Object?> get props => [id, surname, nameClient, address];
+  List<Object?> get props => [id, nameClient, address];
+
+  static ClientModel fromSnapshopt(DocumentSnapshot snap) {
+    ClientModel clientModel = ClientModel(
+        id: snap['id'],
+        nameClient: snap['nameClient'],
+        address: snap['address']);
+    return clientModel;
+  }
 
   ClientModel copyWith({
     int? id,
-    String? surname,
     String? nameClient,
     String? address,
   }) {
     return ClientModel(
       id: id ?? this.id,
-      surname: surname ?? this.surname,
       nameClient: nameClient ?? this.nameClient,
       address: address ?? this.address,
     );
@@ -32,11 +37,6 @@ class ClientModel extends Equatable {
 }
 
 final clientsList = [
-  ClientModel(
-      id: 1, surname: 'Roggi', nameClient: "Antonio", address: "Via Roma 94"),
-  ClientModel(
-      id: 2,
-      surname: 'Buoncompagni',
-      nameClient: "Giovanni",
-      address: "Via pinco 37 Verona"),
+  ClientModel(id: 1, nameClient: "Antonio", address: "Via Roma 94"),
+  ClientModel(id: 2, nameClient: "Giovanni", address: "Via pinco 37 Verona"),
 ];
