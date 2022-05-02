@@ -15,54 +15,29 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
       : _clientRepository = clientRepository,
         super(ClientsLoading()) {
     on<LoadClients>(_onloadClients);
-    on<AddClients>(_onAddClients);
-    on<DeleteClients>(_onDeleteClients);
+    /* on<AddClients>(_onAddClients);
+    on<DeleteClients>(_onDeleteClients); */
     on<UpdateClients>(_onUpdateClients);
   }
 
-  /* @override
-  Stream<ClientsState> mapEventToState(
-    ClientsEvent event,
-  ) async* {
-    if (event is LoadClients) {
-      yield* _mapLoadClientsToState();
-    }
-    if (event is UpdateClients) {
-      yield* _mapUpdateCategoriesToState(event);
-    }
-  } */
-
-  void _onloadClients(LoadClients event, Emitter<ClientsState> emit) {
-    _clientSubscription?.cancel();
-    _clientSubscription =
-        _clientRepository.getAllClients().listen((clientProduct) {
-      UpdateClients(clientProduct);
-    });
-  }
-
-  /* FutureOr<void> _onloadClients(LoadClients event, Emitter<ClientsState> emit) {
-    emit(ClientsLoaded(clients: event.clients));
-  }
- */
-
-  FutureOr<void> _onAddClients(AddClients event, Emitter<ClientsState> emit) {}
-
-  FutureOr<void> _onDeleteClients(
-      DeleteClients event, Emitter<ClientsState> emit) {}
-
-  FutureOr<void> _onUpdateClients(
-      UpdateClients event, Emitter<ClientsState> emit) {}
-
-  Stream<ClientsState> _mapLoadClientsToState() async* {
+  void _onloadClients(
+    LoadClients event,
+    Emitter<ClientsState> emit,
+  ) {
     _clientSubscription?.cancel();
     _clientSubscription = _clientRepository.getAllClients().listen(
-          (clients) => add(
-            UpdateClients(clients),
+          (products) => add(
+            UpdateClients(products),
           ),
         );
   }
 
-  Stream<ClientsState> _mapUpdateCategoriesToState(UpdateClients event) async* {
-    yield ClientsLoaded(clients: event.clients);
+  void _onUpdateClients(
+    UpdateClients event,
+    Emitter<ClientsState> emit,
+  ) {
+    emit(
+      ClientsLoaded(clients: event.clients),
+    );
   }
 }

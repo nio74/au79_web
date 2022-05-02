@@ -26,7 +26,9 @@ Future main() async {
     BlocProvider(create: (_) => ListRepairBloc()),
     BlocProvider(create: (_) => RepairsBloc()),
     BlocProvider(
-        create: (_) => ClientsBloc(clientRepository: ClientRepository())),
+      create: (_) => ClientsBloc(clientRepository: ClientRepository())
+        ..add(const LoadClients()),
+    )
   ], child: const MyApp()));
 }
 

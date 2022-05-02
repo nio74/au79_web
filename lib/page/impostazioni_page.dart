@@ -1,3 +1,4 @@
+import 'package:au79_web/repository/client_repository.dart';
 import 'package:flutter/material.dart';
 
 class ImpostazioniPage extends StatefulWidget {
@@ -19,7 +20,7 @@ class _ImpostazioniPageState extends State<ImpostazioniPage> {
                 leading: const FlutterLogo(),
                 title: const Text('Cambia colore thema'),
                 trailing: ElevatedButton(
-                    onPressed: () async {
+                    onPressed: () {
                       /* ThemeMode newThemeMode =
                           sharedConfig.themeMode == ThemeMode.light
                               ? ThemeMode.dark
@@ -31,6 +32,8 @@ class _ImpostazioniPageState extends State<ImpostazioniPage> {
                             ? Brightness.light
                             : Brightness.dark,
                       ); */
+                      ClientRepository repository = ClientRepository();
+                      repository.getData();
                     },
                     child: Text("switch dark/Light")),
               ),

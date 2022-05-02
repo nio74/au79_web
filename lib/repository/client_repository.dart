@@ -12,9 +12,45 @@ class ClientRepository extends ClientBaseRepository {
   @override
   Stream<List<ClientModel>> getAllClients() {
     return _firebaseFirestore.collection('clients').snapshots().map((snapshot) {
-      return snapshot.docs
-          .map((doc) => ClientModel.fromSnapshopt(doc))
-          .toList();
+      final risultato =
+          snapshot.docs.map((doc) => ClientModel.fromSnapshopt(doc)).toList();
+      print(risultato);
+
+      return risultato;
     });
   }
+
+  final _fireStore = FirebaseFirestore.instance;
+  Future<List<ClientModel>> getData() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot = await _fireStore.collection('clients').get();
+
+    // Get data from docs and convert map to List
+    final allData = querySnapshot.docs
+        .map((doc) => ClientModel.fromSnapshopt(doc))
+        .toList();
+    return allData;
+
+    print(allData);
+  }
+
+  Future readClients() async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    return users.snapshots();
+  }
+
+  Future createClient() async {
+    final int id;
+    final String address;
+    final String nameClient;
+    final CollectionReference docClient =
+        FirebaseFirestore.instance.collection('clients');
+
+    return docClient
+        .doc('miachiave')
+        .set({'id': 3, 'address': "via mia", 'clientName': "Porcospino"});
+  }
+
+  final CollectionReference _postCollection =
+      FirebaseFirestore.instance.collection('clients');
 }

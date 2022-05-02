@@ -15,18 +15,19 @@ class LoadClients extends ClientsEvent {
   List<Object> get props => [clients];
 }
 
+class UpdateClients extends ClientsEvent {
+  final List<ClientModel> clients;
+
+  const UpdateClients(this.clients);
+  @override
+  List<Object> get props => [clients];
+}
+
 class AddClients extends ClientsEvent {
   final ClientModel clients;
   const AddClients({
     required this.clients,
   });
-  @override
-  List<Object> get props => [clients];
-}
-
-class UpdateClients extends ClientsEvent {
-  final List<ClientModel> clients;
-  const UpdateClients(this.clients);
   @override
   List<Object> get props => [clients];
 }

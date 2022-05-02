@@ -8,6 +8,8 @@ import 'package:easy_autocomplete/easy_autocomplete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../repository/client_repository.dart';
+
 class RiparazionePage extends StatefulWidget {
   RiparazionePage({Key? key}) : super(key: key);
 
@@ -20,9 +22,7 @@ class _PageRiparazioniState extends State<RiparazionePage> {
   void initState() {
     super.initState();
 
-    BlocProvider.of<RepairsBloc>(context).add(Loadrepairs(repairs: repairList));
-    BlocProvider.of<ClientsBloc>(context)
-        .add(LoadClients(clients: clientsList));
+    // BlocProvider.of<RepairsBloc>(context).add(Loadrepairs(repairs: repairList));
   }
 
   @override
@@ -41,6 +41,8 @@ class _PageRiparazioniState extends State<RiparazionePage> {
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/ins_mod_repair');
+                      /*  ClientRepository rep = ClientRepository();
+                      rep.createClient(); */
                     },
                     child: const Text('INSERT')),
               ),

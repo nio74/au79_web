@@ -1,7 +1,8 @@
 import 'package:au79_web/page/home_page.dart';
 import 'package:au79_web/page/impostazioni_page.dart';
 import 'package:au79_web/page/ins_mod_repair.dart';
-import 'package:au79_web/page/repairs_pages.dart';
+
+import 'package:au79_web/page/repairs_page.dart';
 import 'package:flutter/material.dart';
 
 class RouteGeneretor {
