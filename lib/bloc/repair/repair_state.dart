@@ -1,17 +1,17 @@
-part of 'repairs_bloc.dart';
+part of 'repair_bloc.dart';
 
-abstract class RepairsState extends Equatable {
-  const RepairsState();
+abstract class RepairState extends Equatable {
+  const RepairState();
 
   @override
   List<Object> get props => [];
 }
 
-class RepairsLoading extends RepairsState {}
+class RepairLoading extends RepairState {}
 
-class RepairsLoaded extends RepairsState {
+class RepairLoaded extends RepairState {
   final List<RepairModel> repairs;
-  const RepairsLoaded(
+  const RepairLoaded(
       {this.repairs =
           const <RepairModel>[]}); // pass to costructor an empty lyst
   @override

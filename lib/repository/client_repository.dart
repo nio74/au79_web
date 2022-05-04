@@ -13,7 +13,7 @@ class ClientRepository extends ClientBaseRepository {
   Stream<List<ClientModel>> getAllClients() {
     return _firebaseFirestore.collection('clients').snapshots().map((snapshot) {
       final risultato =
-          snapshot.docs.map((doc) => ClientModel.fromSnapshopt(doc)).toList();
+          snapshot.docs.map((doc) => ClientModel.fromSnapshot(doc)).toList();
       print(risultato);
 
       return risultato;
@@ -26,9 +26,8 @@ class ClientRepository extends ClientBaseRepository {
     QuerySnapshot querySnapshot = await _fireStore.collection('clients').get();
 
     // Get data from docs and convert map to List
-    final allData = querySnapshot.docs
-        .map((doc) => ClientModel.fromSnapshopt(doc))
-        .toList();
+    final allData =
+        querySnapshot.docs.map((doc) => ClientModel.fromSnapshot(doc)).toList();
     return allData;
 
     print(allData);

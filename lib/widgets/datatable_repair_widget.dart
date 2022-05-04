@@ -1,4 +1,4 @@
-import 'package:au79_web/blocs/repairs/repairs_bloc.dart';
+import 'package:au79_web/bloc/repair/repair_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,13 +16,13 @@ class DataTableRepairWidget extends StatelessWidget {
   ) {
     //final blocRiparazioni = ListaRiparazioniBloc();
 
-    return BlocBuilder<RepairsBloc, RepairsState>(builder: (context, state) {
-      if (state is RepairsLoading) {
+    return BlocBuilder<RepairBloc, RepairState>(builder: (context, state) {
+      if (state is RepairLoading) {
         return const Center(
           child: CircularProgressIndicator(),
         );
       } else {
-        final repairs = (state as RepairsLoaded).repairs;
+        final repairs = (state as RepairLoaded).repairs;
         return SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: DataTable(

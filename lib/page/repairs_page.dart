@@ -1,5 +1,4 @@
-import 'package:au79_web/blocs/clients/clients_bloc.dart';
-import 'package:au79_web/blocs/repairs/repairs_bloc.dart';
+import 'package:au79_web/bloc/clients/clients_bloc.dart';
 import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/model/repair_model.dart';
 import 'package:au79_web/widgets/datatable_repair_widget.dart';

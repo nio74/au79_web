@@ -15,7 +15,8 @@ class ClientModel extends Equatable {
   @override
   List<Object?> get props => [id, nameClient, address];
 
-  static ClientModel fromSnapshopt(DocumentSnapshot snap) {
+  static ClientModel fromSnapshot(DocumentSnapshot snap) {
+    var data = snap.data();
     ClientModel clientModel = ClientModel(
       id: snap.data().toString().contains('id') ? snap.get('id') : '', //Strin
       nameClient: snap.data().toString().contains('nameClient')

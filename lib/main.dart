@@ -1,8 +1,9 @@
-import 'package:au79_web/blocs/clients/clients_bloc.dart';
-import 'package:au79_web/blocs/list_rip_bloc.dart';
-import 'package:au79_web/blocs/repairs/repairs_bloc.dart';
+import 'package:au79_web/bloc/clients/clients_bloc.dart';
+import 'package:au79_web/bloc/list_rip_bloc.dart';
+import 'package:au79_web/bloc/repair/repair_bloc.dart';
 import 'package:au79_web/page/home_page.dart';
 import 'package:au79_web/repository/client_repository.dart';
+import 'package:au79_web/repository/repair_repository.dart';
 import 'package:au79_web/route/route_generator.dart';
 import 'package:au79_web/themes/dark_theme.dart';
 import 'package:au79_web/themes/light_theme.dart';
@@ -24,7 +25,9 @@ Future main() async {
 
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (_) => ListRepairBloc()),
-    BlocProvider(create: (_) => RepairsBloc()),
+    BlocProvider(
+        create: (_) => RepairBloc(repairRepository: RepairRepository())
+          ..add(LoadRepairs())),
     BlocProvider(
       create: (_) => ClientsBloc(clientRepository: ClientRepository())
         ..add(const LoadClients()),

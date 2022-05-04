@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class RepairModel extends Equatable {
@@ -15,6 +16,21 @@ class RepairModel extends Equatable {
 
   @override
   List<Object?> get props => [code, nameClient, object, workTodo];
+
+  static RepairModel fromSnapshot(DocumentSnapshot snap) {
+    var data = snap.data();
+    RepairModel repairModel = RepairModel(
+        code: snap.data().toString().contains('code') ? snap.get('code') : '',
+        nameClient: snap.data().toString().contains('nameClient')
+            ? snap.get('nameClient')
+            : '',
+        object:
+            snap.data().toString().contains('object') ? snap.get('object') : '',
+        workTodo: snap.data().toString().contains('workTodo')
+            ? snap.get('workTodo')
+            : '');
+    return repairModel;
+  }
 
   RepairModel copyWith({
     int? code,
