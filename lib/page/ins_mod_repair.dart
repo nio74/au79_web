@@ -1,4 +1,4 @@
-import 'package:au79_web/blocs/clients/clients_bloc.dart';
+import 'package:au79_web/bloc/clients/clients_bloc.dart';
 import 'package:au79_web/widgets/custom_text_form_field.dart';
 import 'package:au79_web/widgets/drawer_custom_widget.dart';
 import 'package:easy_autocomplete/easy_autocomplete.dart';
@@ -13,8 +13,10 @@ class InsModRepair extends StatefulWidget {
 }
 
 class _InsModRepairState extends State<InsModRepair> {
-  final _objectController = TextEditingController();
-  final _workTodoController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _objectController = TextEditingController();
+  final TextEditingController _workTodoController = TextEditingController();
 
   @override
   void dispose() {
@@ -33,14 +35,30 @@ class _InsModRepairState extends State<InsModRepair> {
           Row(children: [
             Expanded(
               child: Card(
-                child: Column(
-                  children: [
-                    EasyAutocompleteWidget(),
-                    CustomTextFormField(
-                        controller: _objectController, txtLable: 'Object'),
-                    CustomTextFormField(
-                        controller: _workTodoController, txtLable: 'Work to do')
-                  ],
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const EasyAutocompleteWidget(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextFormField(
+                          maxline: 5,
+                          controller: _objectController,
+                          txtLable: 'Oggetti'),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextFormField(
+                          maxline: 5,
+                          controller: _workTodoController,
+                          txtLable: 'Lavorazioni d aeseguire')
+                    ],
+                  ),
                 ),
               ),
             )
@@ -67,10 +85,11 @@ class EasyAutocompleteWidget extends StatelessWidget {
         } else {
           final clients = (state as ClientsLoaded).clients;
           return EasyAutocomplete(
+            controller: ,
               decoration: InputDecoration(
-                  label: Text('Inserire nome Cliente'),
+                  label: const Text('Inserire nome Cliente'),
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide(
@@ -83,8 +102,8 @@ class EasyAutocompleteWidget extends StatelessWidget {
                           style: BorderStyle.solid))),
               suggestionBuilder: (data) {
                 return Container(
-                    margin: EdgeInsets.all(1),
-                    padding: EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(1),
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(5)),
@@ -96,7 +115,6 @@ class EasyAutocompleteWidget extends StatelessWidget {
                 print('onChange Value: $value');
               });
         }
-        ;
       },
     );
   }
