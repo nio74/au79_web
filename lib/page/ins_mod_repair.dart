@@ -1,5 +1,5 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
-import 'package:au79_web/widgets/custom_text_form_field.dart';
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:au79_web/widgets/drawer_custom_widget.dart';
 import 'package:easy_autocomplete/easy_autocomplete.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +14,11 @@ class InsModRepair extends StatefulWidget {
 
 class _InsModRepairState extends State<InsModRepair> {
   final _formKey = GlobalKey<FormState>();
-
+  final TextEditingController _clientController = TextEditingController();
   final TextEditingController _objectController = TextEditingController();
   final TextEditingController _workTodoController = TextEditingController();
+
+  bool formValide = false;
 
   @override
   void dispose() {
@@ -37,12 +39,22 @@ class _InsModRepairState extends State<InsModRepair> {
               child: Card(
                 child: Form(
                   key: _formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  onChanged: () {
+                    final isValid = _formKey.currentState?.validate() ?? false;
+                    setState(() {
+                      formValide = isValid;
+                    });
+                  },
                   child: Column(
                     children: [
                       const SizedBox(
                         height: 10,
                       ),
-                      const EasyAutocompleteWidget(),
+                      /* EasyAutocompleteWidget(
+                        controller: _clientController,
+                      ), */
+                      SimpleAutoCompleteTextField();
                       const SizedBox(
                         height: 10,
                       ),
@@ -69,10 +81,16 @@ class _InsModRepairState extends State<InsModRepair> {
   }
 }
 
+
+
 class EasyAutocompleteWidget extends StatelessWidget {
   const EasyAutocompleteWidget({
+    required TextEditingController controller,
     Key? key,
-  }) : super(key: key);
+  })  : _controller = controller,
+        super(key: key);
+
+  final TextEditingController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +103,8 @@ class EasyAutocompleteWidget extends StatelessWidget {
         } else {
           final clients = (state as ClientsLoaded).clients;
           return EasyAutocomplete(
-            controller: ,
+              controller: _controller,
+              
               decoration: InputDecoration(
                   label: const Text('Inserire nome Cliente'),
                   contentPadding:
@@ -113,7 +132,8 @@ class EasyAutocompleteWidget extends StatelessWidget {
               suggestions: clients.map((e) => e.nameClient).toList(),
               onChanged: (value) {
                 print('onChange Value: $value');
-              });
+              }
+              );
         }
       },
     );
