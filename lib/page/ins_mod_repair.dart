@@ -1,4 +1,5 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
+import 'package:au79_web/widgets/custom_text_form_field.dart';
 
 import 'package:au79_web/widgets/drawer_custom_widget.dart';
 import 'package:easy_autocomplete/easy_autocomplete.dart';
@@ -55,10 +56,11 @@ class _InsModRepairState extends State<InsModRepair> {
                       /* EasyAutocompleteWidget(
                         controller: _clientController,
                       ), */
-                     CustoSimpleTextFieldAutocomplete(),
+                      CustoSimpleTextFieldAutocomplete(),
                       const SizedBox(
                         height: 10,
                       ),
+                      //CustomTextFormField(controller: _clientController, txtLable: '',),
                       CustomTextFormField(
                           maxline: 5,
                           controller: _objectController,
@@ -82,19 +84,48 @@ class _InsModRepairState extends State<InsModRepair> {
   }
 }
 
-class CustoSimpleTextFieldAutocomplete extend StatelessWidget {
+class CustoSimpleTextFieldAutocomplete extends StatelessWidget {
+  const CustoSimpleTextFieldAutocomplete({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ClientsBloc, ClientsState>(
-      builder: (context,state) {
-        return SimpleAutocompleteFormField(
-          itemBuilder: itemBuilder, onSearch: onSearch);
-      }
-    )
+    return BlocBuilder<ClientsBloc, ClientsState>(builder: (context, state) {
+      return BlocBuilder<ClientsBloc, ClientsState>(builder: (context, state) {
+        if (state is ClientsLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          final clients = (state as ClientsLoaded).clients;
+          return SimpleAutocompleteFormField(
+            itemBuilder: (context, _) => Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(clients.map((e) => e.nameClient).toList().toString(),
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ]),
+            ),
+            onSearch: (search) async => clients
+                .where((clients) => clients.nameClient
+                    .toLowerCase()
+                    .contains(search.toLowerCase()))
+                .toList(),
+            itemFromString: (string) {
+              final matches = clients.where((clients) =>
+                  clients.nameClient
+                      .toLowerCase()
+                      .contains(clients.toLowerCase()) ==
+                  string.toLowerCase());
+              return matches.isEmpty ? null : matches.first;
+            },
+          );
+        }
+      });
+    });
   }
 }
-
-
 
 class EasyAutocompleteWidget extends StatelessWidget {
   const EasyAutocompleteWidget({
@@ -117,7 +148,6 @@ class EasyAutocompleteWidget extends StatelessWidget {
           final clients = (state as ClientsLoaded).clients;
           return EasyAutocomplete(
               controller: _controller,
-              
               decoration: InputDecoration(
                   label: const Text('Inserire nome Cliente'),
                   contentPadding:
@@ -145,8 +175,7 @@ class EasyAutocompleteWidget extends StatelessWidget {
               suggestions: clients.map((e) => e.nameClient).toList(),
               onChanged: (value) {
                 print('onChange Value: $value');
-              }
-              );
+              });
         }
       },
     );
