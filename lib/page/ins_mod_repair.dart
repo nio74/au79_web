@@ -1,9 +1,10 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
-import 'package:autocomplete_textfield/autocomplete_textfield.dart';
+
 import 'package:au79_web/widgets/drawer_custom_widget.dart';
 import 'package:easy_autocomplete/easy_autocomplete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simple_autocomplete_formfield/simple_autocomplete_formfield.dart';
 
 class InsModRepair extends StatefulWidget {
   InsModRepair({Key? key}) : super(key: key);
@@ -54,7 +55,7 @@ class _InsModRepairState extends State<InsModRepair> {
                       /* EasyAutocompleteWidget(
                         controller: _clientController,
                       ), */
-                      SimpleAutoCompleteTextField();
+                     CustoSimpleTextFieldAutocomplete(),
                       const SizedBox(
                         height: 10,
                       ),
@@ -78,6 +79,18 @@ class _InsModRepairState extends State<InsModRepair> {
         ],
       ),
     );
+  }
+}
+
+class CustoSimpleTextFieldAutocomplete extend StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ClientsBloc, ClientsState>(
+      builder: (context,state) {
+        return SimpleAutocompleteFormField(
+          itemBuilder: itemBuilder, onSearch: onSearch);
+      }
+    )
   }
 }
 
