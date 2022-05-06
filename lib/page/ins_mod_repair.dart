@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_autocomplete_formfield/simple_autocomplete_formfield.dart';
 
 class InsModRepair extends StatefulWidget {
-  InsModRepair({Key? key}) : super(key: key);
+  const InsModRepair({Key? key}) : super(key: key);
 
   @override
   State<InsModRepair> createState() => _InsModRepairState();
@@ -20,7 +20,8 @@ class _InsModRepairState extends State<InsModRepair> {
   final TextEditingController _objectController = TextEditingController();
   final TextEditingController _workTodoController = TextEditingController();
 
-  bool formValide = false;
+  bool _formValid = false;
+  bool autocomleteValid = false;
 
   @override
   void dispose() {
@@ -45,24 +46,27 @@ class _InsModRepairState extends State<InsModRepair> {
                   onChanged: () {
                     final isValid = _formKey.currentState?.validate() ?? false;
                     setState(() {
-                      formValide = isValid;
+                      _formValid = isValid;
                     });
                   },
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 10,
+                        height: 30,
                       ),
-                      /* EasyAutocompleteWidget(
+
+                      //CustomTextFormField(controller: _clientController, txtLable: '',),
+                      EasyAutocompleteWidget(
+                        txtLable: 'Inserire Cliente',
                         controller: _clientController,
-                      ), */
-                      CustoSimpleTextFieldAutocomplete(),
+                        errorText: _errorText,
+                      ),
                       const SizedBox(
                         height: 10,
                       ),
-                      //CustomTextFormField(controller: _clientController, txtLable: '',),
                       CustomTextFormField(
                           maxline: 5,
+                          errorText: _errorText,
                           controller: _objectController,
                           txtLable: 'Oggetti'),
                       const SizedBox(
@@ -70,8 +74,15 @@ class _InsModRepairState extends State<InsModRepair> {
                       ),
                       CustomTextFormField(
                           maxline: 5,
+                          errorText: _errorText,
                           controller: _workTodoController,
-                          txtLable: 'Lavorazioni d aeseguire')
+                          txtLable: 'Lavorazioni d aeseguire'),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                          onPressed: _formValid ? () {} : null,
+                          child: const Text('SALVA')),
                     ],
                   ),
                 ),
@@ -82,59 +93,45 @@ class _InsModRepairState extends State<InsModRepair> {
       ),
     );
   }
-}
 
-class CustoSimpleTextFieldAutocomplete extends StatelessWidget {
-  const CustoSimpleTextFieldAutocomplete({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ClientsBloc, ClientsState>(builder: (context, state) {
-      return BlocBuilder<ClientsBloc, ClientsState>(builder: (context, state) {
-        if (state is ClientsLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          final clients = (state as ClientsLoaded).clients;
-          return SimpleAutocompleteFormField(
-            itemBuilder: (context, _) => Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(clients.map((e) => e.nameClient).toList().toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                  ]),
-            ),
-            onSearch: (search) async => clients
-                .where((clients) => clients.nameClient
-                    .toLowerCase()
-                    .contains(search.toLowerCase()))
-                .toList(),
-            itemFromString: (string) {
-              final matches = clients.where((clients) =>
-                  clients.nameClient
-                      .toLowerCase()
-                      .contains(clients.toLowerCase()) ==
-                  string.toLowerCase());
-              return matches.isEmpty ? null : matches.first;
-            },
-          );
-        }
+  get _errorText {
+    final textClient = _clientController.value.text;
+    final textObject = _objectController.value.text;
+    final textworkToDo = _workTodoController.value.text;
+    // Note: you can do your own custom validation here
+    // Move this logic this outside the widget for more testable code
+    if (textClient.isEmpty && textObject.isEmpty && textworkToDo.isEmpty) {
+      return 'Il campo non puo essere vuto';
+    }
+    /* if (textObject.isEmpty) {
+      return 'Il campo non puo essere vuto';
+      
+    }
+    if (textworkToDo.isEmpty) {
+      return 'Il campo non puo essere vuto';
+    }  */
+    else {
+      setState(() {
+        _formValid = true;
       });
-    });
+    }
   }
 }
 
 class EasyAutocompleteWidget extends StatelessWidget {
-  const EasyAutocompleteWidget({
+  EasyAutocompleteWidget({
     required TextEditingController controller,
+    required errorText,
+    required String txtLable,
     Key? key,
   })  : _controller = controller,
+        _txtLable = txtLable,
+        _errorText = errorText,
         super(key: key);
 
   final TextEditingController _controller;
+  final String? _errorText;
+  final String _txtLable;
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +146,8 @@ class EasyAutocompleteWidget extends StatelessWidget {
           return EasyAutocomplete(
               controller: _controller,
               decoration: InputDecoration(
-                  label: const Text('Inserire nome Cliente'),
+                  errorText: _errorText,
+                  label: Text(_txtLable),
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                   focusedBorder: OutlineInputBorder(
