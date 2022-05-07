@@ -34,8 +34,9 @@ class ClientRepository extends ClientBaseRepository {
   }
 
   Future readClients() async {
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
-    return users.snapshots();
+    CollectionReference clients =
+        FirebaseFirestore.instance.collection('users');
+    return clients.snapshots();
   }
 
   Future createClient() async {
@@ -48,6 +49,10 @@ class ClientRepository extends ClientBaseRepository {
     return docClient
         .doc('miachiave')
         .set({'id': 3, 'address': "via mia", 'clientName': "Porcospino"});
+  }
+
+  addClient(ClientModel clientData) async {
+    await _firebaseFirestore.collection("clients").add(clientData.toMap());
   }
 
   final CollectionReference _postCollection =
