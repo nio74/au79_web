@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class ClientModel extends Equatable {
-  final String id;
+  final String? id;
   final String nameClient;
   final String address;
 
@@ -26,6 +26,19 @@ class ClientModel extends Equatable {
           snap.data().toString().contains('address') ? snap.get('address') : '',
     );
     return clientModel;
+  }
+
+  ClientModel.fromMap(Map<String, dynamic> clientMap)
+      : id = clientMap["id"],
+        nameClient = clientMap["nameClient"],
+        address = clientMap["address"];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'nameClient': nameClient,
+      'address': address,
+    };
   }
 }
 
