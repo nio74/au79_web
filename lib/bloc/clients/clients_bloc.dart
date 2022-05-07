@@ -15,8 +15,8 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
       : _clientRepository = clientRepository,
         super(ClientsLoading()) {
     on<LoadClients>(_onloadClients);
-    /* on<AddClients>(_onAddClients);
-    on<DeleteClients>(_onDeleteClients); */
+    on<AddClients>(_onAddClients);
+    //on<DeleteClients>(_onDeleteClients);
     on<UpdateClients>(_onUpdateClients);
   }
 
@@ -39,5 +39,9 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
     emit(
       ClientsLoaded(clients: event.clients),
     );
+  }
+
+  FutureOr<void> _onAddClients(AddClients event, Emitter<ClientsState> emit) {
+    _clientSubscription?.cancel();
   }
 }

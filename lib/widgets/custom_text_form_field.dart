@@ -6,16 +6,16 @@ class CustomTextFormField extends StatelessWidget {
     int? maxline,
     required TextEditingController controller,
     required String txtLable,
-    required errorText,
+    //required errorText,
   })  : _controller = controller,
         _txtLable = txtLable,
         _maxLine = maxline,
-        _errorText = errorText,
+        // _errorText = errorText,
         super(key: key);
 
   final int? _maxLine;
   final TextEditingController _controller;
-  final String? _errorText;
+  // final String? _errorText;
   final String _txtLable;
 
   @override
@@ -25,16 +25,16 @@ class CustomTextFormField extends StatelessWidget {
 
       //keyboardType: TextInputType.name,
       decoration: InputDecoration(
-          errorText: _errorText,
+          //   errorText: _errorText,
           border: const OutlineInputBorder(),
           label: Text(_txtLable)),
       maxLines: _maxLine,
-      /* validator: (value) {
+      validator: (value) {
         if (value == null || value.isEmpty) {
-          return '$_txtLable cannot be empty ';
+          return '$_txtLable non puo\' essere  ';
         }
         return null;
-      }, */
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
+import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/widgets/custom_text_form_field.dart';
 
 import 'package:au79_web/widgets/drawer_custom_widget.dart';
@@ -22,9 +23,12 @@ class _InsModRepairState extends State<InsModRepair> {
 
   bool _formValid = false;
   bool autocomleteValid = false;
+  String _lable = 'Cliente';
+  Color _colorEdge = Color(0xff416ff4);
 
   @override
   void dispose() {
+    _clientController.dispose();
     _objectController.dispose();
     _workTodoController.dispose();
     super.dispose();
@@ -48,25 +52,23 @@ class _InsModRepairState extends State<InsModRepair> {
                     setState(() {
                       _formValid = isValid;
                     });
+                    _errorText();
                   },
                   child: Column(
                     children: [
                       const SizedBox(
                         height: 30,
                       ),
-
-                      //CustomTextFormField(controller: _clientController, txtLable: '',),
-                      EasyAutocompleteWidget(
-                        txtLable: 'Inserire Cliente',
-                        controller: _clientController,
-                        errorText: _errorText,
+                      const SizedBox(
+                        height: 10,
                       ),
+                      customTextFieldAutocomplete(),
                       const SizedBox(
                         height: 10,
                       ),
                       CustomTextFormField(
                           maxline: 5,
-                          errorText: _errorText,
+                          // errorText: _errorText,
                           controller: _objectController,
                           txtLable: 'Oggetti'),
                       const SizedBox(
@@ -74,7 +76,7 @@ class _InsModRepairState extends State<InsModRepair> {
                       ),
                       CustomTextFormField(
                           maxline: 5,
-                          errorText: _errorText,
+                          // errorText: _errorText,
                           controller: _workTodoController,
                           txtLable: 'Lavorazioni d aeseguire'),
                       const SizedBox(
@@ -94,26 +96,63 @@ class _InsModRepairState extends State<InsModRepair> {
     );
   }
 
-  get _errorText {
-    final textClient = _clientController.value.text;
-    final textObject = _objectController.value.text;
-    final textworkToDo = _workTodoController.value.text;
-    // Note: you can do your own custom validation here
-    // Move this logic this outside the widget for more testable code
-    if (textClient.isEmpty && textObject.isEmpty && textworkToDo.isEmpty) {
-      return 'Il campo non puo essere vuto';
-    }
-    /* if (textObject.isEmpty) {
-      return 'Il campo non puo essere vuto';
-      
-    }
-    if (textworkToDo.isEmpty) {
-      return 'Il campo non puo essere vuto';
-    }  */
-    else {
-      setState(() {
-        _formValid = true;
-      });
+  customTextFieldAutocomplete() {
+    return BlocBuilder<ClientsBloc, ClientsState>(
+      builder: (context, state) {
+        if (state is ClientsLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          final clients = (state as ClientsLoaded).clients;
+          return EasyAutocomplete(
+              controller: _clientController,
+              decoration: InputDecoration(
+                  errorText: _errorText(),
+                  label: Text(_lable),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                          color: _colorEdge, style: BorderStyle.solid)),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColor,
+                          style: BorderStyle.solid))),
+              suggestionBuilder: (data) {
+                return Container(
+                    margin: const EdgeInsets.all(1),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Text(data,
+                        style: Theme.of(context).textTheme.headline3));
+              },
+              suggestions: clients.map((e) => e.nameClient).toList(),
+              onChanged: (value) {
+                /*   if (value.isEmpty) {
+                  setState(() {
+                    _lable = 'Testo errato';
+                    _colorEdge = Colors.red;
+                  });
+
+                  print('object ${value}');
+                } */
+              });
+        }
+      },
+    );
+  }
+
+  _errorText() {
+    final text = _clientController.text;
+    if (text.isEmpty) {
+      _formValid = false;
+
+      return 'Inserire il nome del Cliente';
     }
   }
 }
@@ -121,17 +160,17 @@ class _InsModRepairState extends State<InsModRepair> {
 class EasyAutocompleteWidget extends StatelessWidget {
   EasyAutocompleteWidget({
     required TextEditingController controller,
-    required errorText,
+    //required errorText,
     required String txtLable,
     Key? key,
   })  : _controller = controller,
         _txtLable = txtLable,
-        _errorText = errorText,
+        // _errorText = errorText,
         super(key: key);
 
   final TextEditingController _controller;
-  final String? _errorText;
-  final String _txtLable;
+  //final String? _errorText;
+  String _txtLable;
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +185,7 @@ class EasyAutocompleteWidget extends StatelessWidget {
           return EasyAutocomplete(
               controller: _controller,
               decoration: InputDecoration(
-                  errorText: _errorText,
+                  // errorText: _errorText,
                   label: Text(_txtLable),
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -172,7 +211,9 @@ class EasyAutocompleteWidget extends StatelessWidget {
               },
               suggestions: clients.map((e) => e.nameClient).toList(),
               onChanged: (value) {
-                print('onChange Value: $value');
+                if (value.length > 3) {
+                  _txtLable = 'il campo non puo essere vuoto';
+                }
               });
         }
       },
