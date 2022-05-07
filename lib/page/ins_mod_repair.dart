@@ -1,12 +1,11 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
-import 'package:au79_web/model/client_model.dart';
+
 import 'package:au79_web/widgets/custom_text_form_field.dart';
 
 import 'package:au79_web/widgets/drawer_custom_widget.dart';
 import 'package:easy_autocomplete/easy_autocomplete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_autocomplete_formfield/simple_autocomplete_formfield.dart';
 
 class InsModRepair extends StatefulWidget {
   const InsModRepair({Key? key}) : super(key: key);
@@ -23,8 +22,6 @@ class _InsModRepairState extends State<InsModRepair> {
 
   bool _formValid = false;
   bool autocomleteValid = false;
-  String _lable = 'Cliente';
-  Color _colorEdge = Color(0xff416ff4);
 
   @override
   void dispose() {
@@ -109,13 +106,13 @@ class _InsModRepairState extends State<InsModRepair> {
               controller: _clientController,
               decoration: InputDecoration(
                   errorText: _errorText(),
-                  label: Text(_lable),
+                  label: Text('Cliente'),
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                          color: _colorEdge, style: BorderStyle.solid)),
+                      borderSide:
+                          BorderSide(color: Theme.of(context).primaryColor)),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide(
