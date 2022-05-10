@@ -38,6 +38,13 @@ class DrawerCustomWidget extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: const Icon(Icons.key),
+            title: const Text('Clienti'),
+            onTap: () {
+              Navigator.pushNamed(context, '/clients_page');
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Impostazioni'),
             onTap: () {

@@ -1,4 +1,6 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
+import 'package:au79_web/model/client_model.dart';
+import 'package:au79_web/model/repair_model.dart';
 
 import 'package:au79_web/widgets/custom_text_form_field.dart';
 
@@ -16,6 +18,7 @@ class InsModRepair extends StatefulWidget {
 
 class _InsModRepairState extends State<InsModRepair> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _codeController = TextEditingController();
   final TextEditingController _clientController = TextEditingController();
   final TextEditingController _objectController = TextEditingController();
   final TextEditingController _workTodoController = TextEditingController();
@@ -30,6 +33,9 @@ class _InsModRepairState extends State<InsModRepair> {
     _workTodoController.dispose();
     super.dispose();
   }
+
+  RepairModel repair =
+      const RepairModel(code: 0, nameClient: '', object: '', workTodo: '');
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +65,28 @@ class _InsModRepairState extends State<InsModRepair> {
                       const SizedBox(
                         height: 10,
                       ),
+                      CustomTextFormField(
+                          controller: _codeController,
+                          txtLable: 'Codice',
+                          initialValue: 'initialValue',
+                          onChanged: (value) {
+                            repair = repair.copyWith(code: int.parse(value));
+                          }),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       customTextFieldAutocomplete(),
                       const SizedBox(
                         height: 10,
                       ),
                       CustomTextFormField(
                           maxline: 5,
-                          // errorText: _errorText,
                           controller: _objectController,
-                          txtLable: 'Oggetti'),
+                          txtLable: 'Oggetti',
+                          initialValue: '',
+                          onChanged: (value) {
+                            repair = repair.copyWith(object: value);
+                          }),
                       const SizedBox(
                         height: 10,
                       ),
@@ -75,7 +94,11 @@ class _InsModRepairState extends State<InsModRepair> {
                           maxline: 5,
                           // errorText: _errorText,
                           controller: _workTodoController,
-                          txtLable: 'Lavorazioni d aeseguire'),
+                          txtLable: 'Lavorazioni d aeseguire',
+                          initialValue: '',
+                          onChanged: (value) {
+                            repair = repair.copyWith(workTodo: value);
+                          }),
                       const SizedBox(
                         height: 10,
                       ),
@@ -104,6 +127,7 @@ class _InsModRepairState extends State<InsModRepair> {
           final clients = (state as ClientsLoaded).clients;
           return EasyAutocomplete(
               controller: _clientController,
+              initialValue: '',
               decoration: InputDecoration(
                   errorText: _errorText(),
                   label: Text('Cliente'),
@@ -130,14 +154,7 @@ class _InsModRepairState extends State<InsModRepair> {
               },
               suggestions: clients.map((e) => e.nameClient).toList(),
               onChanged: (value) {
-                /*   if (value.isEmpty) {
-                  setState(() {
-                    _lable = 'Testo errato';
-                    _colorEdge = Colors.red;
-                  });
-
-                  print('object ${value}');
-                } */
+                repair.copyWith(nameClient: value);
               });
         }
       },
