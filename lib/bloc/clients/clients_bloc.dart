@@ -26,8 +26,8 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   ) {
     _clientSubscription?.cancel();
     _clientSubscription = _clientRepository.getAllClients().listen(
-          (products) => add(
-            UpdateClients(products),
+          (clients) => add(
+            UpdateClients(clients),
           ),
         );
   }
@@ -41,7 +41,15 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
     );
   }
 
-  FutureOr<void> _onAddClients(AddClients event, Emitter<ClientsState> emit) {
-    _clientSubscription?.cancel();
+  _onAddClients(AddClients event, Emitter<ClientsState> emit) {
+    if (state is ClientsLoaded) {
+      _clientSubscription?.cancel();
+      List<ClientModel> newClient = List.from((state as ClientsLoaded).clients)
+        ..add(event.clients);
+
+      _clientRepository.addClient(newClient);
+
+      emit(ClientsLoaded(clients: newClient));
+    }
   }
 }

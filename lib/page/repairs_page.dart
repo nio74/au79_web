@@ -1,6 +1,4 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
-import 'package:au79_web/model/client_model.dart';
-import 'package:au79_web/model/repair_model.dart';
 import 'package:au79_web/widgets/datatable_repair_widget.dart';
 import 'package:au79_web/widgets/drawer_custom_widget.dart';
 import 'package:easy_autocomplete/easy_autocomplete.dart';

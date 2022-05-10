@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
+  final int? _maxLine;
+  final TextEditingController _controller;
+  // final String? _errorText;
+  final String _txtLable;
+  final String initialValue;
+  final Function(String)? onChanged;
+  final Function(bool)? onFocusChanged;
+
+  const CustomTextFormField({
     Key? key,
     int? maxline,
     required TextEditingController controller,
     required String txtLable,
+    required this.initialValue,
+    required this.onChanged,
+    this.onFocusChanged,
     //required errorText,
   })  : _controller = controller,
         _txtLable = txtLable,
@@ -13,15 +24,13 @@ class CustomTextFormField extends StatelessWidget {
         // _errorText = errorText,
         super(key: key);
 
-  final int? _maxLine;
-  final TextEditingController _controller;
-  // final String? _errorText;
-  final String _txtLable;
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _controller,
+      initialValue: initialValue,
+      onChanged: onChanged,
+      onEditingComplete: () {},
 
       //keyboardType: TextInputType.name,
       decoration: InputDecoration(
