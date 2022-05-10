@@ -5,7 +5,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController _controller;
   // final String? _errorText;
   final String _txtLable;
-  final String initialValue;
+  //final String initialValue;
   final Function(String)? onChanged;
   final Function(bool)? onFocusChanged;
 
@@ -14,7 +14,7 @@ class CustomTextFormField extends StatelessWidget {
     int? maxline,
     required TextEditingController controller,
     required String txtLable,
-    required this.initialValue,
+    // required this.initialValue,
     required this.onChanged,
     this.onFocusChanged,
     //required errorText,
@@ -28,7 +28,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _controller,
-      initialValue: initialValue,
+      //initialValue: initialValue,
       onChanged: onChanged,
       onEditingComplete: () {},
 

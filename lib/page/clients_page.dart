@@ -65,7 +65,7 @@ class _ClientsPageState extends State<ClientsPage> {
                       CustomTextFormField(
                           controller: _idController,
                           txtLable: 'Codice',
-                          initialValue: '',
+                          //initialValue: '',
                           onChanged: (value) {
                             client = client.copyWith(id: value);
                           }),
@@ -76,7 +76,7 @@ class _ClientsPageState extends State<ClientsPage> {
                           maxline: 5,
                           controller: _nameClientController,
                           txtLable: 'Nome Cliente',
-                          initialValue: '',
+                          // initialValue: '',
                           onChanged: (value) {
                             client = client.copyWith(nameClient: value);
                           }),
@@ -86,9 +86,9 @@ class _ClientsPageState extends State<ClientsPage> {
                       CustomTextFormField(
                           maxline: 5,
                           // errorText: _errorText,
-                          controller: _idController,
+                          controller: _addressController,
                           txtLable: 'Indirizzo',
-                          initialValue: '',
+                          //initialValue: '',
                           onChanged: (value) {
                             client = client.copyWith(address: value);
                           }),

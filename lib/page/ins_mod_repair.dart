@@ -68,7 +68,7 @@ class _InsModRepairState extends State<InsModRepair> {
                       CustomTextFormField(
                           controller: _codeController,
                           txtLable: 'Codice',
-                          initialValue: 'initialValue',
+                          // initialValue: 'initialValue',
                           onChanged: (value) {
                             repair = repair.copyWith(code: int.parse(value));
                           }),
@@ -83,7 +83,7 @@ class _InsModRepairState extends State<InsModRepair> {
                           maxline: 5,
                           controller: _objectController,
                           txtLable: 'Oggetti',
-                          initialValue: '',
+                          // initialValue: '',
                           onChanged: (value) {
                             repair = repair.copyWith(object: value);
                           }),
@@ -95,7 +95,7 @@ class _InsModRepairState extends State<InsModRepair> {
                           // errorText: _errorText,
                           controller: _workTodoController,
                           txtLable: 'Lavorazioni d aeseguire',
-                          initialValue: '',
+                          //initialValue: '',
                           onChanged: (value) {
                             repair = repair.copyWith(workTodo: value);
                           }),

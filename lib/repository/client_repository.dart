@@ -52,8 +52,10 @@ class ClientRepository extends ClientBaseRepository {
   }
 
   Future<void> addClient(List<ClientModel> clientData) async {
-    await _firebaseFirestore
-        .collection("clients")
-        .add(clientData.map((e) => e.toMap()).toList());
+    var resultList = [];
+    for (ClientModel item in clientData) {
+      resultList.add(
+          await _firebaseFirestore.collection("clients").add(item.toMap()));
+    }
   }
 }
