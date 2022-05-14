@@ -69,7 +69,9 @@ class ClientRepository extends ClientBaseRepository {
         'nameclient': clientData.map((e) => e.nameClient),
         'address': clientData.map((e) => e.address),
       });
-      // ignore: empty_catches
-    } catch (e) {}
+    } catch (e) {
+      // ignore: avoid_print
+      print("Error InsertData method addClient2 $e");
+    }
   }
 }
