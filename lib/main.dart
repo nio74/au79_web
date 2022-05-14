@@ -1,5 +1,5 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
-import 'package:au79_web/bloc/list_rip_bloc.dart';
+
 import 'package:au79_web/bloc/repair/repair_bloc.dart';
 import 'package:au79_web/page/home_page.dart';
 import 'package:au79_web/repository/client_repository.dart';
@@ -24,7 +24,6 @@ Future main() async {
           measurementId: "G-SM21S8496E"));
 
   runApp(MultiBlocProvider(providers: [
-    BlocProvider(create: (_) => ListRepairBloc()),
     BlocProvider(
         create: (_) => RepairBloc(repairRepository: RepairRepository())
           ..add(LoadRepairs())),
