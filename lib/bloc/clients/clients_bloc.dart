@@ -47,7 +47,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
       List<ClientModel> newClient = List.from((state as ClientsLoaded).clients)
         ..add(event.clients);
 
-      _clientRepository.addClient(newClient);
+      _clientRepository.addClient2(newClient);
 
       emit(ClientsLoaded(clients: newClient));
     }

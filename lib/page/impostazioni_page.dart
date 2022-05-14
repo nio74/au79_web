@@ -35,7 +35,7 @@ class _ImpostazioniPageState extends State<ImpostazioniPage> {
                       ClientRepository repository = ClientRepository();
                       repository.getData();
                     },
-                    child: Text("switch dark/Light")),
+                    child: const Text("switch dark/Light")),
               ),
             ),
           ],

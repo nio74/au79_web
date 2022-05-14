@@ -1,5 +1,5 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
-import 'package:au79_web/model/client_model.dart';
+
 import 'package:au79_web/model/repair_model.dart';
 
 import 'package:au79_web/widgets/custom_text_form_field.dart';
@@ -130,7 +130,7 @@ class _InsModRepairState extends State<InsModRepair> {
               initialValue: '',
               decoration: InputDecoration(
                   errorText: _errorText(),
-                  label: Text('Cliente'),
+                  label: const Text('Cliente'),
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                   focusedBorder: OutlineInputBorder(

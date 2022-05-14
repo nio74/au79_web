@@ -58,4 +58,18 @@ class ClientRepository extends ClientBaseRepository {
           await _firebaseFirestore.collection("clients").add(item.toMap()));
     }
   }
+
+  Future<void> addClient2(List<ClientModel> clientData) async {
+    try {
+      _firebaseFirestore
+          .collection('clients')
+          .doc(clientData.map((e) => e.id).toString())
+          .set({
+        'id': clientData.map((e) => e.id),
+        'nameclient': clientData.map((e) => e.nameClient),
+        'address': clientData.map((e) => e.address),
+      });
+      // ignore: empty_catches
+    } catch (e) {}
+  }
 }
