@@ -33,12 +33,6 @@ class ClientRepository extends ClientBaseRepository {
     print(allData);
   }
 
-  Future readClients() async {
-    CollectionReference clients =
-        FirebaseFirestore.instance.collection('users');
-    return clients.snapshots();
-  }
-
   Future createClient() async {
     final int id;
     final String address;
@@ -61,13 +55,12 @@ class ClientRepository extends ClientBaseRepository {
 
   Future<void> addClient2(List<ClientModel> clientData) async {
     try {
-      _firebaseFirestore
-          .collection('clients')
-          .doc(clientData.map((e) => e.id).toString())
-          .set({
-        'id': clientData.map((e) => e.id),
-        'nameclient': clientData.map((e) => e.nameClient),
-        'address': clientData.map((e) => e.address),
+      clientData.forEach((client) {
+        _firebaseFirestore.collection('clients').doc(client.id).set({
+          'id': client.id,
+          'nameclient': client.nameClient,
+          'address': client.address,
+        });
       });
     } catch (e) {
       // ignore: avoid_print

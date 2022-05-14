@@ -26,7 +26,7 @@ Future main() async {
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
         create: (_) => RepairBloc(repairRepository: RepairRepository())
-          ..add(LoadRepairs())),
+          ..add(const LoadRepairs())),
     BlocProvider(
       create: (_) => ClientsBloc(clientRepository: ClientRepository())
         ..add(const LoadClients()),

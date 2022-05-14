@@ -44,8 +44,8 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   _onAddClients(AddClients event, Emitter<ClientsState> emit) {
     if (state is ClientsLoaded) {
       _clientSubscription?.cancel();
-      List<ClientModel> newClient = [];
-      newClient.add(event.clients);
+      List<ClientModel> newClient = List.from((state as ClientsLoaded).clients)
+        ..add(event.clients);
 
       _clientRepository.addClient2(newClient);
 
