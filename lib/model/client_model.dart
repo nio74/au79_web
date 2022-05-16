@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class ClientModel extends Equatable {
-  final String id;
+  final int id;
   final String nameClient;
   final String address;
 
@@ -13,7 +13,7 @@ class ClientModel extends Equatable {
   });
 
   ClientModel copyWith({
-    String? id,
+    int? id,
     String? nameClient,
     String? address,
   }) {
@@ -29,7 +29,7 @@ class ClientModel extends Equatable {
 
   factory ClientModel.fromSnapshot(DocumentSnapshot snap) {
     return ClientModel(
-      id: snap['id'].toString(),
+      id: snap['id'],
       nameClient: snap['nameClient'],
       address: snap['address'],
     );
@@ -45,6 +45,6 @@ class ClientModel extends Equatable {
 }
 
 final clientsList = [
-  ClientModel(id: '1', nameClient: "Antonio", address: "Via Roma 94"),
-  ClientModel(id: '2', nameClient: "Giovanni", address: "Via pinco 37 Verona"),
+  ClientModel(id: 1, nameClient: "Antonio", address: "Via Roma 94"),
+  ClientModel(id: 2, nameClient: "Giovanni", address: "Via pinco 37 Verona"),
 ];
