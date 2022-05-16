@@ -81,13 +81,13 @@ class ClientRepository extends ClientBaseRepository {
     }
   }
 
-  Future<void> incrementId() async {
+  int incrementId() {
     try {
-      var nuovoId =
-          _firebaseFirestore.collection('clientId').doc('HO3SxQEdhUtsTJ6VNI4e');
-
-      nuovoId.update({'idClient': FieldValue.increment(1)});
-
+      int nuovoId = _firebaseFirestore
+          .collection('clientId')
+          .doc('HO3SxQEdhUtsTJ6VNI4e')
+          .update({'idClient': FieldValue.increment(1)}) as int;
+      return nuovoId;
       //print('questo e il nuovo codice $risultato');
     } catch (e) {
       print('prova incremento Id fallita  $e');
