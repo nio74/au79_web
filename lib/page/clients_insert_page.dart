@@ -22,6 +22,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   final TextEditingController _nameClientController = TextEditingController();
 
   final TextEditingController _addressController = TextEditingController();
+  final string = _clientRepository.readIdClient().toString();
 
   bool _formValid = false;
 
