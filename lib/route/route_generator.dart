@@ -1,4 +1,4 @@
-import 'package:au79_web/page/clients_page.dart';
+import 'package:au79_web/page/clients_insert_page.dart';
 import 'package:au79_web/page/home_page.dart';
 import 'package:au79_web/page/impostazioni_page.dart';
 import 'package:au79_web/page/ins_mod_repair.dart';
@@ -20,7 +20,7 @@ class RouteGeneretor {
       case '/ins_mod_repair':
         return MaterialPageRoute(builder: (_) => const InsModRepair());
       case '/clients_page':
-        return MaterialPageRoute(builder: (_) => const ClientsPage());
+        return MaterialPageRoute(builder: (_) => const ClientsInsertPage());
 
       /* case '/edit_employee':
         if (args is int) {

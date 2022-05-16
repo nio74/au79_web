@@ -127,7 +127,7 @@ class _InsModRepairState extends State<InsModRepair> {
           final clients = (state as ClientsLoaded).clients;
           return EasyAutocomplete(
               controller: _clientController,
-              initialValue: '',
+              //initialValue: '',
               decoration: InputDecoration(
                   errorText: _errorText(),
                   label: const Text('Cliente'),

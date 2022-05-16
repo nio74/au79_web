@@ -56,15 +56,41 @@ class ClientRepository extends ClientBaseRepository {
   Future<void> addClient2(List<ClientModel> clientData) async {
     try {
       clientData.forEach((client) {
-        _firebaseFirestore.collection('clients').doc(client.id).set({
+        _firebaseFirestore.collection('clients').doc(client.id.toString()).set({
           'id': client.id,
-          'nameclient': client.nameClient,
+          'nameClient': client.nameClient,
           'address': client.address,
         });
       });
     } catch (e) {
       // ignore: avoid_print
       print("Error InsertData method addClient2 $e");
+    }
+  }
+
+  Future<void> readIdClient() async {
+    var risultato = await _firebaseFirestore
+        .collection('clientId')
+        .doc('HO3SxQEdhUtsTJ6VNI4e')
+        .get();
+    if (risultato.exists) {
+      Map<String, dynamic>? data = risultato.data();
+      var value = data?['idClient'];
+      print('codece id del cliente  $value');
+      return value;
+    }
+  }
+
+  Future<void> incrementId() async {
+    try {
+      var nuovoId =
+          _firebaseFirestore.collection('clientId').doc('HO3SxQEdhUtsTJ6VNI4e');
+
+      nuovoId.update({'idClient': FieldValue.increment(1)});
+
+      //print('questo e il nuovo codice $risultato');
+    } catch (e) {
+      print('prova incremento Id fallita  $e');
     }
   }
 }

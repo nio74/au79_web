@@ -15,7 +15,7 @@ class CustomTextFormField extends StatelessWidget {
     required TextEditingController controller,
     required String txtLable,
     // required this.initialValue,
-    required this.onChanged,
+    this.onChanged,
     this.onFocusChanged,
     //required errorText,
   })  : _controller = controller,
@@ -37,6 +37,7 @@ class CustomTextFormField extends StatelessWidget {
           //   errorText: _errorText,
           border: const OutlineInputBorder(),
           label: Text(_txtLable)),
+
       maxLines: _maxLine,
       validator: (value) {
         if (value == null || value.isEmpty) {

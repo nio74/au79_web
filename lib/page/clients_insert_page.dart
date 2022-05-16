@@ -1,19 +1,21 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
 import 'package:au79_web/model/client_model.dart';
+import 'package:au79_web/repository/client_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/custom_text_form_field.dart';
 import '../widgets/drawer_custom_widget.dart';
 
-class ClientsPage extends StatefulWidget {
-  const ClientsPage({Key? key}) : super(key: key);
+class ClientsInsertPage extends StatefulWidget {
+  const ClientsInsertPage({Key? key}) : super(key: key);
 
   @override
-  State<ClientsPage> createState() => _ClientsPageState();
+  State<ClientsInsertPage> createState() => _ClientsInsertPageState();
 }
 
-class _ClientsPageState extends State<ClientsPage> {
+class _ClientsInsertPageState extends State<ClientsInsertPage> {
+  final ClientRepository _clientRepository = ClientRepository();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _idController = TextEditingController();
 
@@ -33,7 +35,12 @@ class _ClientsPageState extends State<ClientsPage> {
     super.dispose();
   }
 
-  ClientModel client = ClientModel(id: '', nameClient: '', address: '');
+  ClientModel client = ClientModel(id: 0, nameClient: '', address: '');
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +69,7 @@ class _ClientsPageState extends State<ClientsPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      CustomTextFormField(
-                          controller: _idController,
-                          txtLable: 'Codice',
-                          //initialValue: '',
-                          onChanged: (value) {
-                            client = client.copyWith(id: value);
-                          }),
+                      Text(_clientRepository.readIdClient().toString()),
                       const SizedBox(
                         height: 10,
                       ),
@@ -100,6 +101,7 @@ class _ClientsPageState extends State<ClientsPage> {
                               ? () {
                                   BlocProvider.of<ClientsBloc>(context)
                                       .add(AddClients(clients: client));
+                                  _clientRepository.readIdClient();
                                 }
                               : null,
                           child: const Text('SALVA')),
