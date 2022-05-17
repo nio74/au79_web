@@ -15,18 +15,27 @@ class ClientsInsertPage extends StatefulWidget {
 }
 
 class _ClientsInsertPageState extends State<ClientsInsertPage> {
-  final ClientRepository _clientRepository = ClientRepository();
+  final _clientRepository = ClientRepository();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _idController = TextEditingController();
 
   final TextEditingController _nameClientController = TextEditingController();
 
   final TextEditingController _addressController = TextEditingController();
-  final string = _clientRepository.readIdClient().toString();
 
   bool _formValid = false;
-
   bool autocomleteValid = false;
+
+  Future<void> createId() async {
+    var initId = _clientRepository.readIdClient().toString();
+    print('questo e il nuovoId  $initId');
+  }
+
+  @override
+  void initState() {
+    createId();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -37,11 +46,6 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   }
 
   ClientModel client = ClientModel(id: 0, nameClient: '', address: '');
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +74,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(_clientRepository.readIdClient().toString()),
+                      Text(createId().toString()),
                       const SizedBox(
                         height: 10,
                       ),

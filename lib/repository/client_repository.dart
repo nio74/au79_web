@@ -76,18 +76,18 @@ class ClientRepository extends ClientBaseRepository {
     if (risultato.exists) {
       Map<String, dynamic>? data = risultato.data();
       var value = data?['idClient'];
-      print('codece id del cliente  $value');
-      return value;
+      print('codice id del cliente  $value');
+      //return value;
     }
   }
 
-  int incrementId() {
+  Future<void> incrementId() async {
     try {
-      int nuovoId = _firebaseFirestore
-          .collection('clientId')
-          .doc('HO3SxQEdhUtsTJ6VNI4e')
-          .update({'idClient': FieldValue.increment(1)}) as int;
-      return nuovoId;
+      var nuovoId =
+          _firebaseFirestore.collection('clientId').doc('HO3SxQEdhUtsTJ6VNI4e');
+
+      nuovoId.update({'idClient': FieldValue.increment(1)}).toString();
+
       //print('questo e il nuovo codice $risultato');
     } catch (e) {
       print('prova incremento Id fallita  $e');
