@@ -13,9 +13,10 @@ class ClientidnuovoBloc extends Bloc<ClientidnuovoEvent, ClientidnuovoState> {
       : _clientRepository = clientRepository,
         super(ClientidLoading()) {
     on<LoadId>(_onLoadId);
+    ;
   }
 
-  FutureOr<void> _onLoadId(LoadId event, Emitter<ClientidnuovoState> emit) {
+  _onLoadId(LoadId event, Emitter<ClientidnuovoState> emit) {
     if (state is ClientidLoading) {
       emit(ClientIdLoaded('18'));
     }
