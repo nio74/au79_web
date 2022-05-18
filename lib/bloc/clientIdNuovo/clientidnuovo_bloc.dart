@@ -9,9 +9,15 @@ part 'clientidnuovo_state.dart';
 
 class ClientidnuovoBloc extends Bloc<ClientidnuovoEvent, ClientidnuovoState> {
   final ClientRepository _clientRepository;
-  ClientidnuovoBloc() : super(ClientidLoading()) {
+  ClientidnuovoBloc({required ClientRepository clientRepository})
+      : _clientRepository = clientRepository,
+        super(ClientidLoading()) {
     on<LoadId>(_onLoadId);
   }
 
-  FutureOr<void> _onLoadId(LoadId event, Emitter<ClientidnuovoState> emit) {}
+  FutureOr<void> _onLoadId(LoadId event, Emitter<ClientidnuovoState> emit) {
+    if (state is ClientidLoading) {
+      emit(ClientIdLoaded('18'));
+    }
+  }
 }
