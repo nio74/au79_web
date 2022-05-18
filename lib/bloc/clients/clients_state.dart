@@ -9,8 +9,6 @@ abstract class ClientsState extends Equatable {
 
 class ClientsLoading extends ClientsState {}
 
-class ClientIdLoading extends ClientsState {}
-
 class ClientsLoaded extends ClientsState {
   final List<ClientModel> clients;
   const ClientsLoaded(
@@ -18,13 +16,4 @@ class ClientsLoaded extends ClientsState {
           const <ClientModel>[]}); // pass to costructor an empty lyst
   @override
   List<Object> get props => [clients];
-}
-
-class ClientIdLoaded extends ClientsState {
-  final String idNuovo;
-
-  const ClientIdLoaded(this.idNuovo);
-
-  @override
-  List<Object> get props => [idNuovo];
 }
