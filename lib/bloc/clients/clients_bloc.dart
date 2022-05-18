@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/repository/client_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -14,6 +15,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   ClientsBloc({required ClientRepository clientRepository})
       : _clientRepository = clientRepository,
         super(ClientsLoading()) {
+    on<LoadId>(onLoadId);
     on<LoadClients>(_onloadClients);
     on<AddClients>(_onAddClients);
     //on<DeleteClients>(_onDeleteClients);
@@ -50,6 +52,13 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
       _clientRepository.addClient2(newClient);
 
       emit(ClientsLoaded(clients: newClient));
+    }
+  }
+
+  onLoadId(LoadId event, Emitter<ClientsState> emit) {
+    if (state is ClientIdLoaded) {
+      _clientSubscription?.cancel();
+      emit(ClientIdLoaded('12'));
     }
   }
 }
