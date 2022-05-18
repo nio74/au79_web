@@ -1,4 +1,5 @@
-import 'package:au79_web/bloc/clients/clients_bloc.dart';
+import 'package:au79_web/bloc/clientIdNuovo/clientidnuovo_bloc.dart';
+
 import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/repository/client_repository.dart';
 import 'package:flutter/material.dart';
@@ -72,9 +73,9 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      BlocBuilder<ClientsBloc, ClientsState>(
+                      BlocBuilder<ClientidnuovoBloc, ClientidnuovoState>(
                         builder: (context, state) {
-                          if (state is ClientsLoading) {
+                          if (state is ClientidLoading) {
                             return const CircularProgressIndicator();
                           } else {
                             final id = (state as ClientIdLoaded).idNuovo;
