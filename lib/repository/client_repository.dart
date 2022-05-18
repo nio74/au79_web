@@ -68,29 +68,27 @@ class ClientRepository extends ClientBaseRepository {
     }
   }
 
-  Future<void> readIdClient() async {
+  Future<String> readIdClient() async {
     var risultato = await _firebaseFirestore
         .collection('clientId')
         .doc('HO3SxQEdhUtsTJ6VNI4e')
         .get();
-    if (risultato.exists) {
-      Map<String, dynamic>? data = risultato.data();
-      var value = data?['idClient'];
-      print('codice id del cliente  $value');
-      //return value;
-    }
+
+    Map<String, dynamic>? data = risultato.data();
+    return data?['idClient'];
   }
 
-  Future<void> incrementId() async {
+  Future<String?> incrementId() async {
     try {
       var nuovoId =
           _firebaseFirestore.collection('clientId').doc('HO3SxQEdhUtsTJ6VNI4e');
 
-      nuovoId.update({'idClient': FieldValue.increment(1)}).toString();
+      return nuovoId.update({'idClient': FieldValue.increment(1)}).toString();
 
-      //print('questo e il nuovo codice $risultato');
+      print('questo e il nuovo codice $nuovoId');
     } catch (e) {
       print('prova incremento Id fallita  $e');
+      return '';
     }
   }
 }

@@ -3,6 +3,7 @@ import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/repository/client_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:au79_web/bloc/clients/clients_bloc.dart';
 
 import '../widgets/custom_text_form_field.dart';
 import '../widgets/drawer_custom_widget.dart';
@@ -26,14 +27,11 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   bool _formValid = false;
   bool autocomleteValid = false;
 
-  Future<void> createId() async {
-    var initId = _clientRepository.readIdClient().toString();
-    print('questo e il nuovoId  $initId');
-  }
+  Future<void>? _futureid;
 
   @override
   void initState() {
-    createId();
+    // _futureid = _clientRepository.readIdClient();
     super.initState();
   }
 
@@ -74,7 +72,16 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(createId().toString()),
+                      BlocBuilder<ClientsBloc, ClientsState>(
+                        builder: (context, state) {
+                          if (state is ClientIdLoading) {
+                            return const CircularProgressIndicator();
+                          } else {
+                            final id = (state as ClientIdLoaded).idNuovo;
+                            return Text(id);
+                          }
+                        },
+                      ),
                       const SizedBox(
                         height: 10,
                       ),
