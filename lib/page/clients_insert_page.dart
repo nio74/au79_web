@@ -74,7 +74,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       ),
                       BlocBuilder<ClientsBloc, ClientsState>(
                         builder: (context, state) {
-                          if (state is ClientIdLoading) {
+                          if (state is ClientsLoading) {
                             return const CircularProgressIndicator();
                           } else {
                             final id = (state as ClientIdLoaded).idNuovo;

@@ -1,0 +1,10 @@
+part of 'clientidnuovo_bloc.dart';
+
+abstract class ClientidnuovoState extends Equatable {
+  const ClientidnuovoState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class ClientidLoading extends ClientidnuovoState {}
