@@ -8,3 +8,12 @@ abstract class ClientidnuovoState extends Equatable {
 }
 
 class ClientidLoading extends ClientidnuovoState {}
+
+class ClientIdLoaded extends ClientidnuovoState {
+  final String idNuovo;
+
+  const ClientIdLoaded(this.idNuovo);
+
+  @override
+  List<Object> get props => [idNuovo];
+}

@@ -1,3 +1,4 @@
+import 'package:au79_web/bloc/clientIdNuovo/clientidnuovo_bloc.dart';
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
 
 import 'package:au79_web/bloc/repair/repair_bloc.dart';
@@ -30,7 +31,9 @@ Future main() async {
     BlocProvider(
       create: (_) => ClientsBloc(clientRepository: ClientRepository())
         ..add(const LoadClients()),
-    )
+    ),
+    BlocProvider(
+        create: (_) => ClientidnuovoBloc(clientRepository: ClientRepository())),
   ], child: const MyApp()));
 }
 
