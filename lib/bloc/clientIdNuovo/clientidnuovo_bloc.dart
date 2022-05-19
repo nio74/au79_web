@@ -10,11 +10,12 @@ class ClientidnuovoBloc extends Bloc<ClientidnuovoEvent, ClientidnuovoState> {
   ClientidnuovoBloc({required ClientRepository clientRepository})
       : _clientRepository = clientRepository,
         super(ClientIdLoaded('5')) {
-    on<LoadId>(_onLoadId);
+    on<LoadIdEvent>(_onLoadId);
     ;
   }
 
-  Future<void> _onLoadId(LoadId event, Emitter<ClientidnuovoState> emit) async {
+  Future<void> _onLoadId(
+      LoadIdEvent event, Emitter<ClientidnuovoState> emit) async {
     final courrentState = (state as ClientIdLoaded).idNuovo;
     emit(ClientIdLoaded('nuovo'));
   }

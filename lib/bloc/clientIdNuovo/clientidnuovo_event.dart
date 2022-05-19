@@ -7,11 +7,4 @@ abstract class ClientidnuovoEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadId extends ClientidnuovoEvent {
-  final String idNuovo;
-
-  const LoadId(this.idNuovo);
-
-  @override
-  List<Object> get props => [idNuovo];
-}
+class LoadIdEvent extends ClientidnuovoEvent {}
