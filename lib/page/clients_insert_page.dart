@@ -32,7 +32,6 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
 
   @override
   void initState() {
-    // _futureid = _clientRepository.readIdClient();
     super.initState();
   }
 
