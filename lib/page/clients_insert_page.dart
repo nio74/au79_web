@@ -33,6 +33,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<ClientidnuovoBloc>(context).add(ClientIdLoaded());
   }
 
   @override
