@@ -68,7 +68,7 @@ class ClientRepository extends ClientBaseRepository {
     }
   }
 
-  Future<String> readIdClient() async {
+/*   Future<String> readIdClient() async {
     var risultato = await _firebaseFirestore
         .collection('clientId')
         .doc('HO3SxQEdhUtsTJ6VNI4e')
@@ -76,6 +76,14 @@ class ClientRepository extends ClientBaseRepository {
 
     Map<String, dynamic>? data = risultato.data();
     return data?['idClient'];
+  } */
+
+  Future<String> readIdClient() async {
+    String risultato = 'prova vuoto maledettol';
+
+    return Future.delayed(const Duration(seconds: 2), () => risultato);
+
+    //print('risultato di readIdClient$data');
   }
 
   Future<String?> incrementId() async {
