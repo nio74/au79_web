@@ -33,7 +33,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ClientidnuovoBloc>(context).add(LoadIdEvent());
+    //BlocProvider.of<ClientsBloc>(context).add(LoadIdExtEvent());
   }
 
   @override
@@ -73,12 +73,12 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      BlocBuilder<ClientidnuovoBloc, ClientidnuovoState>(
+                      BlocBuilder<ClientsBloc, ClientsState>(
                         builder: (context, state) {
                           if (state is ClientidLoading) {
                             return const CircularProgressIndicator();
                           } else {
-                            final id = (state as ClientIdLoaded).idNuovo;
+                            final id = (state as ClientIdExtLoaded).idNuovo;
                             return Text(id);
                           }
                         },

@@ -11,17 +11,12 @@ class ClientidnuovoBloc extends Bloc<ClientidnuovoEvent, ClientidnuovoState> {
   ClientidnuovoBloc({required ClientRepository clientRepository})
       : _clientRepository = clientRepository,
         super(ClientidLoading()) {
-    on<LoadIdEvent>(_onLoadId);
-    ;
-  }
-
-  void richiama() {
-    _clientRepository.readIdClient();
+    on<LoadIdExtEvent>(_onLoadId);
   }
 
   Future<void> _onLoadId(
-      LoadIdEvent event, Emitter<ClientidnuovoState> emit) async {
-    var courrentState = (_clientRepository.readIdClient());
-    emit(ClientIdLoaded(courrentState));
+      LoadIdExtEvent event, Emitter<ClientidnuovoState> emit) async {
+    var courrentState = (await _clientRepository.readIdClient());
+    emit(ClientIdExternalLoaded(courrentState));
   }
 }

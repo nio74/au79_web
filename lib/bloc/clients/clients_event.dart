@@ -7,10 +7,10 @@ abstract class ClientsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadId extends ClientsEvent {
+class LoadIdEvent extends ClientsEvent {
   final String idNuovo;
 
-  const LoadId(this.idNuovo);
+  const LoadIdEvent(this.idNuovo);
 
   @override
   List<Object> get props => [idNuovo];

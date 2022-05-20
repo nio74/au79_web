@@ -17,3 +17,11 @@ class ClientsLoaded extends ClientsState {
   @override
   List<Object> get props => [clients];
 }
+
+class ClientIdExtLoaded extends ClientsState {
+  final String idNuovo;
+
+  const ClientIdExtLoaded(this.idNuovo);
+  @override
+  List<Object> get props => [idNuovo];
+}

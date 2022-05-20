@@ -15,6 +15,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   ClientsBloc({required ClientRepository clientRepository})
       : _clientRepository = clientRepository,
         super(ClientsLoading()) {
+    on<LoadIdEvent>(_onLoadId);
     on<LoadClients>(_onloadClients);
     on<AddClients>(_onAddClients);
     //on<DeleteClients>(_onDeleteClients);
@@ -52,5 +53,10 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
 
       emit(ClientsLoaded(clients: newClient));
     }
+  }
+
+  Future<void> _onLoadId(LoadIdEvent event, Emitter<ClientsState> emit) async {
+    var courrentState = (await _clientRepository.readIdClient());
+    emit(ClientIdExtLoaded(courrentState));
   }
 }

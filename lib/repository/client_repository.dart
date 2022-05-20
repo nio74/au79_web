@@ -33,18 +33,6 @@ class ClientRepository extends ClientBaseRepository {
     print(allData);
   }
 
-  Future createClient() async {
-    final int id;
-    final String address;
-    final String nameClient;
-    final CollectionReference docClient =
-        FirebaseFirestore.instance.collection('clients');
-
-    return docClient
-        .doc('miachiave')
-        .set({'id': 3, 'address': "via mia", 'clientName': "Porcospino"});
-  }
-
   Future<void> addClient(List<ClientModel> clientData) async {
     var resultList = [];
     for (ClientModel item in clientData) {
@@ -68,23 +56,30 @@ class ClientRepository extends ClientBaseRepository {
     }
   }
 
-/*   Future<String> readIdClient() async {
-    var risultato = await _firebaseFirestore
+  Future<String> readIdClient() async {
+    var risultato;
+    final result = await _firebaseFirestore
         .collection('clientId')
         .doc('HO3SxQEdhUtsTJ6VNI4e')
         .get();
 
-    Map<String, dynamic>? data = risultato.data();
-    return data?['idClient'];
-  } */
+    Map<String, dynamic>? data = result.data();
+    // Future.delayed(const Duration(seconds: 1), () => data?['idClient']);
 
-  Future<String> readIdClient() async {
+    data?.forEach((key, value) {
+      print('qusta la chiave $key e questo il valore $value');
+      risultato = value;
+    });
+    return risultato.toString();
+  }
+
+  /* Future<String> readIdClient() async {
     String risultato = 'prova vuoto maledettol';
 
     return Future.delayed(const Duration(seconds: 2), () => risultato);
 
     //print('risultato di readIdClient$data');
-  }
+  } */
 
   Future<String?> incrementId() async {
     try {
