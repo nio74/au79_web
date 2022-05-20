@@ -7,7 +7,7 @@ abstract class ClientidnuovoState extends Equatable {
   List<Object> get props => [];
 }
 
-class ClientidLoading extends ClientidnuovoState {}
+class ClientIdLoading extends ClientidnuovoState {}
 
 class ClientIdExternalLoaded extends ClientidnuovoState {
   final String idNuovo;

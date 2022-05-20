@@ -10,7 +10,7 @@ class ClientidnuovoBloc extends Bloc<ClientidnuovoEvent, ClientidnuovoState> {
   final ClientRepository _clientRepository;
   ClientidnuovoBloc({required ClientRepository clientRepository})
       : _clientRepository = clientRepository,
-        super(ClientidLoading()) {
+        super(ClientIdLoading()) {
     on<LoadIdExtEvent>(_onLoadId);
   }
 

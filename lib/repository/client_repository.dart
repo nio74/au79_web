@@ -64,8 +64,9 @@ class ClientRepository extends ClientBaseRepository {
         .get();
 
     Map<String, dynamic>? data = result.data();
-    // Future.delayed(const Duration(seconds: 1), () => data?['idClient']);
-
+    /*  return Future.delayed(
+        const Duration(seconds: 1), () => data?[1]['idCliente']);
+ */
     data?.forEach((key, value) {
       print('qusta la chiave $key e questo il valore $value');
       risultato = value;

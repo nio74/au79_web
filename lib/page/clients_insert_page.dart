@@ -33,7 +33,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   @override
   void initState() {
     super.initState();
-    //BlocProvider.of<ClientsBloc>(context).add(LoadIdExtEvent());
+    BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
   }
 
   @override
@@ -75,7 +75,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       ),
                       BlocBuilder<ClientsBloc, ClientsState>(
                         builder: (context, state) {
-                          if (state is ClientidLoading) {
+                          if (state is ClientsLoading) {
                             return const CircularProgressIndicator();
                           } else {
                             final id = (state as ClientIdExtLoaded).idNuovo;
