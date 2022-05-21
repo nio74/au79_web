@@ -28,6 +28,8 @@ class RepairBloc extends Bloc<RepairEvent, RepairState> {
   }
 
   FutureOr<void> _updateRepair(UpdateRepairs event, Emitter<RepairState> emit) {
-    emit(RepairLoaded(repairs: event.repairs));
+    if (state != RepairLoading) {
+      emit(RepairLoaded(repairs: event.repairs));
+    }
   }
 }

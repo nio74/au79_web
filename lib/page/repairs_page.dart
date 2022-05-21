@@ -1,4 +1,5 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
+import 'package:au79_web/bloc/repair/repair_bloc.dart';
 import 'package:au79_web/widgets/datatable_repair_widget.dart';
 import 'package:au79_web/widgets/drawer_custom_widget.dart';
 import 'package:easy_autocomplete/easy_autocomplete.dart';
@@ -17,9 +18,8 @@ class RiparazionePage extends StatefulWidget {
 class _PageRiparazioniState extends State<RiparazionePage> {
   @override
   void initState() {
+    // BlocProvider.of<RepairBloc>(context).add(LoadRepairs());
     super.initState();
-
-    // BlocProvider.of<RepairsBloc>(context).add(Loadrepairs(repairs: repairList));
   }
 
   @override

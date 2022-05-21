@@ -1,3 +1,4 @@
+import 'package:au79_web/bloc/clientIdNuovo/clientidnuovo_bloc.dart';
 import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/repository/client_repository.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
 
   @override
   void initState() {
-    BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
+    //BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
     //BlocProvider.of<ClientidnuovoBloc>(context).add(LoadIdExtEvent());
     super.initState();
   }
