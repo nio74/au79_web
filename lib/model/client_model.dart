@@ -43,8 +43,3 @@ class ClientModel extends Equatable {
     };
   }
 }
-
-final clientsList = [
-  ClientModel(id: 1, nameClient: "Antonio", address: "Via Roma 94"),
-  ClientModel(id: 2, nameClient: "Giovanni", address: "Via pinco 37 Verona"),
-];

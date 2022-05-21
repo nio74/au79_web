@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:au79_web/cubits/cubit/clientid_cubit.dart';
 import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/repository/client_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -56,9 +55,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   }
 
   Future<void> _onLoadId(LoadIdEvent event, Emitter<ClientsState> emit) async {
-    if (state is ClientsLoaded) {
-      var courrentState = (await _clientRepository.readIdClient());
-      emit(ClientIdExtLoaded(courrentState));
-    }
+    var courrentState = (await _clientRepository.readIdClient());
+    emit(ClientIdExtLoaded(courrentState));
   }
 }

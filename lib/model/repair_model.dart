@@ -18,7 +18,7 @@ class RepairModel extends Equatable {
   List<Object?> get props => [code, nameClient, object, workTodo];
 
   static RepairModel fromSnapshot(DocumentSnapshot snap) {
-    var data = snap.data();
+    // var data = snap.data();
     RepairModel repairModel = RepairModel(
         code: snap.data().toString().contains('code') ? snap.get('code') : '',
         nameClient: snap.data().toString().contains('nameClient')

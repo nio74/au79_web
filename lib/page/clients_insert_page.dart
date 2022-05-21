@@ -1,5 +1,3 @@
-import 'package:au79_web/bloc/clientIdNuovo/clientidnuovo_bloc.dart';
-
 import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/repository/client_repository.dart';
 import 'package:flutter/material.dart';
@@ -28,12 +26,11 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   bool _formValid = false;
   bool autocomleteValid = false;
 
-  Future<void>? _futureid;
-
   @override
   void initState() {
-    super.initState();
     BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
+    //BlocProvider.of<ClientidnuovoBloc>(context).add(LoadIdExtEvent());
+    super.initState();
   }
 
   @override
@@ -41,10 +38,11 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
     _nameClientController.dispose();
     _addressController.dispose();
     _idController.dispose();
+    BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
     super.dispose();
   }
 
-  ClientModel client = ClientModel(id: 0, nameClient: '', address: '');
+  ClientModel client = const ClientModel(id: 0, nameClient: '', address: '');
 
   @override
   Widget build(BuildContext context) {
