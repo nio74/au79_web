@@ -1,12 +1,9 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
-import 'package:au79_web/bloc/repair/repair_bloc.dart';
 import 'package:au79_web/widgets/datatable_repair_widget.dart';
 import 'package:au79_web/widgets/drawer_custom_widget.dart';
 import 'package:easy_autocomplete/easy_autocomplete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../repository/client_repository.dart';
 
 class RiparazionePage extends StatefulWidget {
   RiparazionePage({Key? key}) : super(key: key);

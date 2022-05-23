@@ -1,6 +1,5 @@
-import 'package:au79_web/bloc/clientIdNuovo/clientidnuovo_bloc.dart';
+import 'package:au79_web/bloc/clientIdExternal/clientIdExternalBloc.dart';
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
-
 import 'package:au79_web/bloc/repair/repair_bloc.dart';
 import 'package:au79_web/page/home_page.dart';
 import 'package:au79_web/repository/client_repository.dart';
@@ -26,16 +25,16 @@ Future main() async {
 
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
-      create: (_) => RepairBloc(repairRepository: RepairRepository()),
-      //..add(const LoadRepairs())
-    ),
+        create: (_) => RepairBloc(repairRepository: RepairRepository())
+          ..add(const LoadRepairs())),
     BlocProvider(
       create: (_) => ClientsBloc(clientRepository: ClientRepository())
         ..add(const LoadClients()),
     ),
     BlocProvider(
-        create: (_) => ClientsBloc(clientRepository: ClientRepository())
-          ..add(LoadIdEvent()))
+        create: (_) =>
+            ClientIdExternalBloc(clientRepository: ClientRepository())
+              ..add(LoadIdExtEvent()))
   ], child: const MyApp()));
 }
 

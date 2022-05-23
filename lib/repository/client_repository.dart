@@ -69,7 +69,7 @@ class ClientRepository extends ClientBaseRepository {
  */
     data?.forEach((key, value) {
       print('qusta la chiave $key e questo il valore $value');
-      risultato = value;
+      risultato = value + 1;
     });
     return risultato.toString();
   }
