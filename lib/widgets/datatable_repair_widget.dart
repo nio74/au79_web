@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DataTableRepairWidget extends StatelessWidget {
+  Function? _bloc;
   DataTableRepairWidget({
     Key? key,
     required this.context,
