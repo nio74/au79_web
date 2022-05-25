@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:au79_web/bloc/clientIdExternal/clientIdExternalBloc.dart';
 import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/repository/client_repository.dart';
@@ -79,17 +81,11 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                           } else {
                             final id =
                                 (state as ClientIdExternalLoaded).idNuovo;
-                            return Container(
-                                width: 80,
-                                height: 30,
-                                child: Text(id),
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    border: Border.all(
-                                      color: Colors.red,
-                                    )));
+                            return CustomTextFormField(
+                              enable: false,
+                              txtLable: 'codice',
+                              initvalue: id,
+                            );
                           }
                         },
                       ),
