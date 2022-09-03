@@ -51,6 +51,8 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
       _clientRepository.addClient2(newClient);
 
       emit(ClientsLoaded(clients: newClient));
+    } else {
+      print('non funziona');
     }
   }
 
