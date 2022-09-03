@@ -27,6 +27,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
 
   bool _formValid = false;
   bool autocomleteValid = false;
+  String id_test = '';
 
   @override
   void initState() {
@@ -80,6 +81,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                           } else {
                             final id =
                                 (state as ClientIdExternalLoaded).idNuovo;
+                            id_test = id;
                             return CustomTextFormField(
                               enable: false,
                               txtLable: 'codice',
@@ -117,6 +119,9 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       ElevatedButton(
                           onPressed: _formValid
                               ? () {
+                                  client =
+                                      client.copyWith(id: int.parse(id_test));
+
                                   BlocProvider.of<ClientsBloc>(context)
                                       .add(AddClients(clients: client));
                                   _clientRepository.readIdClient();
