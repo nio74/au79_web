@@ -41,7 +41,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
     _nameClientController.dispose();
     _addressController.dispose();
     _idController.dispose();
-    BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
+    //BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
     super.dispose();
   }
 
