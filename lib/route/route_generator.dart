@@ -1,3 +1,4 @@
+import 'package:au79_web/page/client_insert_page2.dart';
 import 'package:au79_web/page/clients_insert_page.dart';
 import 'package:au79_web/page/home_page.dart';
 import 'package:au79_web/page/impostazioni_page.dart';

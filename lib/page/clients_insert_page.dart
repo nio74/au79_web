@@ -27,12 +27,13 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
 
   bool _formValid = false;
   bool autocomleteValid = false;
-  String id_test = '';
+  String id = '';
 
   @override
   void initState() {
     //BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
     //BlocProvider.of<ClientidnuovoBloc>(context).add(LoadIdExtEvent());
+    // BlocProvider.of<ClientsBloc>(context).emit(ClientsLoaded());
     super.initState();
   }
 
@@ -41,11 +42,11 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
     _nameClientController.dispose();
     _addressController.dispose();
     _idController.dispose();
-    //BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
+    BlocProvider.of<ClientsBloc>(context).emit(const ClientsLoaded());
     super.dispose();
   }
 
-  ClientModel client = const ClientModel(id: 0, nameClient: '', address: '');
+  ClientModel client = ClientModel(id: 0, nameClient: '', address: '');
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +80,8 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                           if (state is ClientIdLoading) {
                             return const CircularProgressIndicator();
                           } else {
-                            final id =
-                                (state as ClientIdExternalLoaded).idNuovo;
-                            id_test = id;
+                            id = (state as ClientIdExternalLoaded).idNuovo;
+
                             return CustomTextFormField(
                               enable: false,
                               txtLable: 'codice',
@@ -119,9 +119,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       ElevatedButton(
                           onPressed: _formValid
                               ? () {
-                                  client =
-                                      client.copyWith(id: int.parse(id_test));
-
+                                  client = client.copyWith(id: int.parse(id));
                                   BlocProvider.of<ClientsBloc>(context)
                                       .add(AddClients(clients: client));
                                   _clientRepository.readIdClient();
