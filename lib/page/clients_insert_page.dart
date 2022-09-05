@@ -33,7 +33,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   void initState() {
     //BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
     //BlocProvider.of<ClientidnuovoBloc>(context).add(LoadIdExtEvent());
-    // BlocProvider.of<ClientsBloc>(context).emit(ClientsLoaded());
+    BlocProvider.of<ClientsBloc>(context).emit(ClientsLoaded());
     super.initState();
   }
 
@@ -122,7 +122,9 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                                   client = client.copyWith(id: int.parse(id));
                                   BlocProvider.of<ClientsBloc>(context)
                                       .add(AddClients(clients: client));
-                                  _clientRepository.readIdClient();
+
+                                  _clientRepository
+                                      .save_id_external(int.parse(id));
                                 }
                               : null,
                           child: const Text('SALVA')),

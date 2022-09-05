@@ -42,3 +42,5 @@ class DeleteClients extends ClientsEvent {
   @override
   List<Object> get props => [clients];
 }
+
+class SaveExternalId extends ClientsEvent {}

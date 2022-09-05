@@ -85,7 +85,7 @@ class ClientRepository extends ClientBaseRepository {
       var nuovoId =
           _firebaseFirestore.collection('clientId').doc('HO3SxQEdhUtsTJ6VNI4e');
 
-      return nuovoId..update({'idClient': FieldValue.increment(1)}).toString();
+      return nuovoId.update({'idClient': FieldValue.increment(1)}).toString();
 
       print('questo e il nuovo codice $nuovoId');
     } catch (e) {
@@ -93,15 +93,14 @@ class ClientRepository extends ClientBaseRepository {
       return '';
     }
   }
-  Future<int> save_id_external(int id){
 
+  Future save_id_external(int id) async {
     try {
-      var save_id = _firebaseFirestore.collection('clientId').doc('HO3SxQEdhUtsTJ6VNI4e');
-      return save_id.set(data)
-      
+      var saveid =
+          _firebaseFirestore.collection('clientId').doc('HO3SxQEdhUtsTJ6VNI4e');
+      saveid.set({'clientId': id});
     } catch (e) {
-      
+      print('save_id_external not work $e');
     }
-
   }
 }
