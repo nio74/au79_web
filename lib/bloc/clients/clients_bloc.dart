@@ -43,7 +43,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   }
 
   _onAddClients(AddClients event, Emitter<ClientsState> emit) {
-    if (state is ClientsLoaded) {
+    if (state is! ClientsLoaded) {
       _clientSubscription?.cancel();
       List<ClientModel> newClient = List.from((state as ClientsLoaded).clients)
         ..add(event.clients);
@@ -52,7 +52,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
 
       emit(ClientsLoaded(clients: newClient));
     } else {
-      print('non funziona');
+      print('_onAddClients not work');
     }
   }
 
