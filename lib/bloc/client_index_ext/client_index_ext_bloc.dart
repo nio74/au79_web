@@ -2,8 +2,8 @@ import 'package:au79_web/repository/client_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-part 'client_Id_external_event.dart';
-part 'client_Id_external_state.dart';
+part 'client_index_ext_event.dart';
+part 'client_index_ext_state.dart';
 
 class ClientIdExternalBloc
     extends Bloc<ClientIdExternalEvent, ClientIdExternalState> {

@@ -1,4 +1,4 @@
-part of 'client_Id_externalBloc.dart';
+part of 'client_index_ext_bloc.dart';
 
 abstract class ClientIdExternalState extends Equatable {
   const ClientIdExternalState();

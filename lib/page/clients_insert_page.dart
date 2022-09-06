@@ -1,5 +1,4 @@
-//import 'package:au79_web/bloc/clientIdExternal/clientIdExternalBloc.dart';
-import 'package:au79_web/bloc/client_Id_external/client_Id_externalBloc.dart';
+import 'package:au79_web/bloc/client_index_ext/client_index_ext_bloc.dart';
 import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/repository/client_repository.dart';
 import 'package:flutter/material.dart';
