@@ -83,18 +83,15 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                             id = (state as ClientIndexExtBlocStateLoaded)
                                 .idNuovo;
                             _idController.text = id;
-
-                            child:
-                            CustomTextFormField(
-                              enable: false,
-                              txtLable: 'codice',
-                              controller: _idController,
-
-                              //initvalue: id,
-                            );
                           }
                         },
-                      ),
+                        child: CustomTextFormField(
+                          enable: false,
+                          txtLable: 'codice',
+                          controller: _idController,
+                        ),
+                      ), //initvalue: id,
+
                       const SizedBox(
                         height: 10,
                       ),
