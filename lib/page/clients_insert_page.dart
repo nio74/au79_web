@@ -84,7 +84,9 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                             return CustomTextFormField(
                               enable: false,
                               txtLable: 'codice',
-                              initvalue: id,
+                              controller: _idController,
+
+                              //initvalue: id,
                             );
                           }
                         },
@@ -124,6 +126,8 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
 
                                   _clientRepository
                                       .save_id_external(int.parse(id));
+
+                                  _idController.text = 'sfsdf';
                                 }
                               : null,
                           child: const Text('SALVA')),
