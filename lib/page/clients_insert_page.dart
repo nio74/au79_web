@@ -18,6 +18,7 @@ class ClientsInsertPage extends StatefulWidget {
 class _ClientsInsertPageState extends State<ClientsInsertPage> {
   final _clientRepository = ClientRepository();
   final _formKey = GlobalKey<FormState>();
+  String id = '';
   final TextEditingController _idController = TextEditingController();
 
   final TextEditingController _nameClientController = TextEditingController();
@@ -26,13 +27,14 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
 
   bool _formValid = false;
   bool autocomleteValid = false;
-  String id = '';
 
   @override
   void initState() {
     //BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
     //BlocProvider.of<ClientidnuovoBloc>(context).add(LoadIdExtEvent());
-    BlocProvider.of<ClientsBloc>(context).emit(ClientsLoaded());
+    BlocProvider.of<ClientIndexExtBloc>(context)
+        .add(ClientIndexExtBlocEventInit());
+
     super.initState();
   }
 
@@ -41,7 +43,8 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
     _nameClientController.dispose();
     _addressController.dispose();
     _idController.dispose();
-    BlocProvider.of<ClientsBloc>(context).emit(const ClientsLoaded());
+    BlocProvider.of<ClientIndexExtBloc>(context)
+        .add(ClientIndexExtBlocEventInit());
     super.dispose();
   }
 
@@ -74,14 +77,15 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      BlocBuilder<ClientIdExternalBloc, ClientIdExternalState>(
-                        builder: (context, state) {
-                          if (state is ClientIdLoading) {
-                            return const CircularProgressIndicator();
-                          } else {
-                            id = (state as ClientIdExternalLoaded).idNuovo;
+                      BlocListener<ClientIndexExtBloc, ClientIndexExtBlocState>(
+                        listener: (context, state) {
+                          if (state is ClientIndexExtBlocStateLoaded) {
+                            id = (state as ClientIndexExtBlocStateLoaded)
+                                .idNuovo;
+                            _idController.text = id;
 
-                            return CustomTextFormField(
+                            child:
+                            CustomTextFormField(
                               enable: false,
                               txtLable: 'codice',
                               controller: _idController,

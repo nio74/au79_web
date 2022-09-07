@@ -32,9 +32,8 @@ Future main() async {
         ..add(const LoadClients()),
     ),
     BlocProvider(
-        create: (_) =>
-            ClientIdExternalBloc(clientRepository: ClientRepository())
-              ..add(LoadIdExtEvent()))
+        create: (_) => ClientIndexExtBloc(clientRepository: ClientRepository())
+          ..add(ClientIndexExtBlocEventInit()))
   ], child: const MyApp()));
 }
 

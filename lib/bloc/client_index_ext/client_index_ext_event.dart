@@ -7,4 +7,4 @@ abstract class ClientIdExternalEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadIdExtEvent extends ClientIdExternalEvent {}
+class ClientIndexExtBlocEventInit extends ClientIdExternalEvent {}

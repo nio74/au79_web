@@ -5,18 +5,19 @@ import 'package:equatable/equatable.dart';
 part 'client_index_ext_event.dart';
 part 'client_index_ext_state.dart';
 
-class ClientIdExternalBloc
-    extends Bloc<ClientIdExternalEvent, ClientIdExternalState> {
+class ClientIndexExtBloc
+    extends Bloc<ClientIdExternalEvent, ClientIndexExtBlocState> {
   final ClientRepository _clientRepository;
-  ClientIdExternalBloc({required ClientRepository clientRepository})
+
+  ClientIndexExtBloc({required ClientRepository clientRepository})
       : _clientRepository = clientRepository,
         super(ClientIdLoading()) {
-    on<LoadIdExtEvent>(_onLoadId);
+    on<ClientIndexExtBlocEventInit>(_onLoadId);
   }
 
-  Future<void> _onLoadId(
-      LoadIdExtEvent event, Emitter<ClientIdExternalState> emit) async {
+  Future<void> _onLoadId(ClientIndexExtBlocEventInit event,
+      Emitter<ClientIndexExtBlocState> emit) async {
     var courrentState = (await _clientRepository.readIdClient());
-    emit(ClientIdExternalLoaded(courrentState));
+    emit(ClientIndexExtBlocStateLoaded(courrentState));
   }
 }

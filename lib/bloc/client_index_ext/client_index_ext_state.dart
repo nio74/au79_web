@@ -1,18 +1,18 @@
 part of 'client_index_ext_bloc.dart';
 
-abstract class ClientIdExternalState extends Equatable {
-  const ClientIdExternalState();
+abstract class ClientIndexExtBlocState extends Equatable {
+  const ClientIndexExtBlocState();
 
   @override
   List<Object> get props => [];
 }
 
-class ClientIdLoading extends ClientIdExternalState {}
+class ClientIdLoading extends ClientIndexExtBlocState {}
 
-class ClientIdExternalLoaded extends ClientIdExternalState {
+class ClientIndexExtBlocStateLoaded extends ClientIndexExtBlocState {
   final String idNuovo;
 
-  const ClientIdExternalLoaded(this.idNuovo);
+  const ClientIndexExtBlocStateLoaded(this.idNuovo);
   @override
   List<Object> get props => [idNuovo];
 }
