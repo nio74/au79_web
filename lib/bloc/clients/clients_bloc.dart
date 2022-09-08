@@ -56,6 +56,16 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
     }
   }
 
+  _onAddClients2(
+      AddClients event, List clientPass, Emitter<ClientsState> emit) {
+    _clientSubscription?.cancel();
+    List<ClientModel> newClient = List.from(clientPass)..add(event.clients);
+
+    _clientRepository.addClient2(newClient);
+
+    emit(ClientsLoaded(clients: newClient));
+  }
+
   Future<void> _onLoadId(LoadIdEvent event, Emitter<ClientsState> emit) async {
     var courrentState = (_clientRepository.readIdClient());
     if (state != ClientsLoading) {

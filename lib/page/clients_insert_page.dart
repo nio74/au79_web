@@ -32,7 +32,8 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   void initState() {
     //BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
     //BlocProvider.of<ClientidnuovoBloc>(context).add(LoadIdExtEvent());
-    //BlocProvider.of<ClientIndexExtBloc>(context).add(ClientIndexExtBlocEventInit());
+    BlocProvider.of<ClientIndexExtBloc>(context)
+        .add(ClientIndexExtBlocEventInit());
 
     super.initState();
   }
@@ -79,8 +80,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       BlocListener<ClientIndexExtBloc, ClientIndexExtBlocState>(
                         listener: (context, state) {
                           if (state is ClientIndexExtBlocStateLoaded) {
-                            id = (state as ClientIndexExtBlocStateLoaded)
-                                .idNuovo;
+                            id = state.idNuovo;
                             _idController.text = id.toString();
                           }
                         },
