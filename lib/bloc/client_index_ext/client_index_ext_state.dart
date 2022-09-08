@@ -10,7 +10,7 @@ abstract class ClientIndexExtBlocState extends Equatable {
 class ClientIdLoading extends ClientIndexExtBlocState {}
 
 class ClientIndexExtBlocStateLoaded extends ClientIndexExtBlocState {
-  final String idNuovo;
+  final int idNuovo;
 
   const ClientIndexExtBlocStateLoaded(this.idNuovo);
   @override

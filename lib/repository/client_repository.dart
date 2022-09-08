@@ -56,7 +56,7 @@ class ClientRepository extends ClientBaseRepository {
     }
   }
 
-  Future<String> readIdClient() async {
+  Future<int> readIdClient() async {
     var risultato;
     final result = await _firebaseFirestore
         .collection('clientId')
@@ -69,17 +69,10 @@ class ClientRepository extends ClientBaseRepository {
       print('qusta la chiave $key e questo il valore $value');
       risultato = value + 1;
     });
-    return risultato.toString();
+    return risultato;
   }
 
-  /* Future<String> readIdClient() async {
-    String risultato = 'prova vuoto maledettol';
-
-    return Future.delayed(const Duration(seconds: 2), () => risultato);
-
-    //print('risultato di readIdClient$data');
-  } */
-
+/* 
   Future<String?> incrementId() async {
     try {
       var nuovoId =
@@ -92,7 +85,7 @@ class ClientRepository extends ClientBaseRepository {
       print('prova incremento Id fallita  $e');
       return '';
     }
-  }
+  } */
 
   Future save_id_external(int id) async {
     try {

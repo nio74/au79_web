@@ -19,7 +19,7 @@ class ClientsLoaded extends ClientsState {
 }
 
 class ClientIdExtLoaded extends ClientsState {
-  final String idNuovo;
+  final int idNuovo;
 
   const ClientIdExtLoaded(this.idNuovo);
   @override

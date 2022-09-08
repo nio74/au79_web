@@ -18,7 +18,7 @@ class ClientsInsertPage extends StatefulWidget {
 class _ClientsInsertPageState extends State<ClientsInsertPage> {
   final _clientRepository = ClientRepository();
   final _formKey = GlobalKey<FormState>();
-  String id = '';
+  int id = 0;
   final TextEditingController _idController = TextEditingController();
 
   final TextEditingController _nameClientController = TextEditingController();
@@ -32,8 +32,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   void initState() {
     //BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
     //BlocProvider.of<ClientidnuovoBloc>(context).add(LoadIdExtEvent());
-    BlocProvider.of<ClientIndexExtBloc>(context)
-        .add(ClientIndexExtBlocEventInit());
+    //BlocProvider.of<ClientIndexExtBloc>(context).add(ClientIndexExtBlocEventInit());
 
     super.initState();
   }
@@ -82,7 +81,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                           if (state is ClientIndexExtBlocStateLoaded) {
                             id = (state as ClientIndexExtBlocStateLoaded)
                                 .idNuovo;
-                            _idController.text = id;
+                            _idController.text = id.toString();
                           }
                         },
                         child: CustomTextFormField(
@@ -121,14 +120,15 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       ElevatedButton(
                           onPressed: _formValid
                               ? () {
-                                  client = client.copyWith(id: int.parse(id));
+                                  client = client.copyWith(id: id);
                                   BlocProvider.of<ClientsBloc>(context)
                                       .add(AddClients(clients: client));
 
-                                  _clientRepository
-                                      .save_id_external(int.parse(id));
+                                  _clientRepository.save_id_external(id);
 
-                                  _idController.text = 'sfsdf';
+                                  _idController.text = (id + 1).toString();
+                                  _addressController.text = '';
+                                  _nameClientController.text = '';
                                 }
                               : null,
                           child: const Text('SALVA')),
