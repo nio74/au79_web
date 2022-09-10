@@ -13,7 +13,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
 
   ClientsBloc({required ClientRepository clientRepository})
       : _clientRepository = clientRepository,
-        super(ClientsLoading()) {
+        super(ClientBlocStatesLoading()) {
     on<ClientBlocLoadIdEvent>(_onLoadId);
     on<ClientBlocEventInit>(_onloadClients);
     on<ClientBlocEventAddClients>(_onAddClients);
@@ -38,19 +38,26 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
     Emitter<ClientsState> emit,
   ) {
     emit(
-      ClientsLoaded(clients: event.clients),
+      ClientsBlocStateLoaded(clients: event.clients),
     );
   }
 
   _onAddClients(ClientBlocEventAddClients event, Emitter<ClientsState> emit) {
-    if (state is ClientsLoaded) {
+    if (state is ClientsBlocStateLoaded) {
       _clientSubscription?.cancel();
-      List<ClientModel> newClient = List.from((state as ClientsLoaded).clients)
-        ..add(event.clients);
+      List<ClientModel> newClient =
+          List.from((state as ClientsBlocStateLoaded).clients)
+            ..add(event.clients);
 
       _clientRepository.addClient2(newClient);
 
-      emit(ClientsLoaded(clients: newClient));
+      emit(ClientsBlocStateLoaded(clients: newClient));
+    }
+    if (state is ClientBlocStateIndexExtLoaded) {
+      List<ClientModel> newClient = List.from({event.clients});
+      _clientRepository.addClient2(newClient);
+
+      print('questi sono i dati ${event.clients}');
     } else {
       print('_onAddClients not work');
     }
@@ -59,8 +66,8 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   Future<void> _onLoadId(
       ClientBlocLoadIdEvent event, Emitter<ClientsState> emit) async {
     var courrentState = (_clientRepository.readIdClient());
-    if (state != ClientsLoading) {
-      emit(ClientIdExtLoaded(await courrentState));
+    if (state != ClientBlocStatesLoading) {
+      emit(ClientBlocStateIndexExtLoaded(await courrentState));
     }
   }
 }

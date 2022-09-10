@@ -76,7 +76,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       ),
                       BlocListener<ClientsBloc, ClientsState>(
                         listener: (context, state) {
-                          if (state is ClientIdExtLoaded) {
+                          if (state is ClientBlocStateIndexExtLoaded) {
                             id = state.idNuovo;
                             _idController.text = id.toString();
                           }

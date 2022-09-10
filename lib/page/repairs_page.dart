@@ -56,12 +56,13 @@ class _PageRiparazioniState extends State<RiparazionePage> {
                     // EasyAutocomplete(),
                     BlocBuilder<ClientsBloc, ClientsState>(
                         builder: (context, state) {
-                      if (state is ClientsLoading) {
+                      if (state is ClientBlocStatesLoading) {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
                       } else {
-                        final clients = (state as ClientsLoaded).clients;
+                        final clients =
+                            (state as ClientsBlocStateLoaded).clients;
                         return EasyAutocomplete(
                           suggestions:
                               clients.map((e) => e.nameClient).toList(),

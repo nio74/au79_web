@@ -7,21 +7,21 @@ abstract class ClientsState extends Equatable {
   List<Object> get props => [];
 }
 
-class ClientsLoading extends ClientsState {}
+class ClientBlocStatesLoading extends ClientsState {}
 
-class ClientsLoaded extends ClientsState {
+class ClientsBlocStateLoaded extends ClientsState {
   final List<ClientModel> clients;
-  const ClientsLoaded(
+  const ClientsBlocStateLoaded(
       {this.clients =
           const <ClientModel>[]}); // pass to costructor an empty lyst
   @override
   List<Object> get props => [clients];
 }
 
-class ClientIdExtLoaded extends ClientsState {
+class ClientBlocStateIndexExtLoaded extends ClientsState {
   final int idNuovo;
 
-  const ClientIdExtLoaded(this.idNuovo);
+  const ClientBlocStateIndexExtLoaded(this.idNuovo);
   @override
   List<Object> get props => [idNuovo];
 }
