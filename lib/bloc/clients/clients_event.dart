@@ -7,40 +7,40 @@ abstract class ClientsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadIdEvent extends ClientsEvent {}
+class ClientBlocLoadIdEvent extends ClientsEvent {}
 
-class LoadClients extends ClientsEvent {
+class ClientBlocEventInit extends ClientsEvent {
   final List<ClientModel> clients;
 
-  const LoadClients({this.clients = const <ClientModel>[]});
+  const ClientBlocEventInit({this.clients = const <ClientModel>[]});
   @override
   List<Object> get props => [clients];
 }
 
-class UpdateClients extends ClientsEvent {
+class ClientBlocEventUpdateClients extends ClientsEvent {
   final List<ClientModel> clients;
 
-  const UpdateClients(this.clients);
+  const ClientBlocEventUpdateClients(this.clients);
   @override
   List<Object> get props => [clients];
 }
 
-class AddClients extends ClientsEvent {
+class ClientBlocEventAddClients extends ClientsEvent {
   final ClientModel clients;
-  const AddClients({
+  const ClientBlocEventAddClients({
     required this.clients,
   });
   @override
   List<Object> get props => [clients];
 }
 
-class DeleteClients extends ClientsEvent {
+class ClientBlocEventDeleteClients extends ClientsEvent {
   final ClientModel clients;
-  const DeleteClients({
+  const ClientBlocEventDeleteClients({
     required this.clients,
   });
   @override
   List<Object> get props => [clients];
 }
 
-class SaveExternalId extends ClientsEvent {}
+class ClientBlocEventSaveExternalId extends ClientsEvent {}

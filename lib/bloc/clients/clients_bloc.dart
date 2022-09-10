@@ -14,27 +14,27 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   ClientsBloc({required ClientRepository clientRepository})
       : _clientRepository = clientRepository,
         super(ClientsLoading()) {
-    on<LoadIdEvent>(_onLoadId);
-    on<LoadClients>(_onloadClients);
-    on<AddClients>(_onAddClients);
+    on<ClientBlocLoadIdEvent>(_onLoadId);
+    on<ClientBlocEventInit>(_onloadClients);
+    on<ClientBlocEventAddClients>(_onAddClients);
     //on<DeleteClients>(_onDeleteClients);
-    on<UpdateClients>(_onUpdateClients);
+    on<ClientBlocEventUpdateClients>(_onUpdateClients);
   }
 
   void _onloadClients(
-    LoadClients event,
+    ClientBlocEventInit event,
     Emitter<ClientsState> emit,
   ) {
     _clientSubscription?.cancel();
     _clientSubscription = _clientRepository.getAllClients().listen(
           (clients) => add(
-            UpdateClients(clients),
+            ClientBlocEventUpdateClients(clients),
           ),
         );
   }
 
   void _onUpdateClients(
-    UpdateClients event,
+    ClientBlocEventUpdateClients event,
     Emitter<ClientsState> emit,
   ) {
     emit(
@@ -42,7 +42,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
     );
   }
 
-  _onAddClients(AddClients event, Emitter<ClientsState> emit) {
+  _onAddClients(ClientBlocEventAddClients event, Emitter<ClientsState> emit) {
     if (state is ClientsLoaded) {
       _clientSubscription?.cancel();
       List<ClientModel> newClient = List.from((state as ClientsLoaded).clients)
@@ -56,17 +56,8 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
     }
   }
 
-  _onAddClients2(
-      AddClients event, List clientPass, Emitter<ClientsState> emit) {
-    _clientSubscription?.cancel();
-    List<ClientModel> newClient = List.from(clientPass)..add(event.clients);
-
-    _clientRepository.addClient2(newClient);
-
-    emit(ClientsLoaded(clients: newClient));
-  }
-
-  Future<void> _onLoadId(LoadIdEvent event, Emitter<ClientsState> emit) async {
+  Future<void> _onLoadId(
+      ClientBlocLoadIdEvent event, Emitter<ClientsState> emit) async {
     var courrentState = (_clientRepository.readIdClient());
     if (state != ClientsLoading) {
       emit(ClientIdExtLoaded(await courrentState));

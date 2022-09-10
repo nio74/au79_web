@@ -29,11 +29,11 @@ Future main() async {
           ..add(const LoadRepairs())),
     BlocProvider(
       create: (_) => ClientsBloc(clientRepository: ClientRepository())
-        ..add(const LoadClients()),
+        ..add(const ClientBlocEventInit()),
     ),
     BlocProvider(
-        create: (_) => ClientIndexExtBloc(clientRepository: ClientRepository())
-          ..add(ClientIndexExtBlocEventInit()))
+        create: (_) => ClientsBloc(clientRepository: ClientRepository())
+          ..add(ClientBlocLoadIdEvent()))
   ], child: const MyApp()));
 }
 

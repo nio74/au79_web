@@ -32,8 +32,6 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   void initState() {
     //BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
     //BlocProvider.of<ClientidnuovoBloc>(context).add(LoadIdExtEvent());
-    BlocProvider.of<ClientIndexExtBloc>(context)
-        .add(ClientIndexExtBlocEventInit());
 
     super.initState();
   }
@@ -43,8 +41,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
     _nameClientController.dispose();
     _addressController.dispose();
     _idController.dispose();
-    BlocProvider.of<ClientIndexExtBloc>(context)
-        .add(ClientIndexExtBlocEventInit());
+
     super.dispose();
   }
 
@@ -77,9 +74,9 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      BlocListener<ClientIndexExtBloc, ClientIndexExtBlocState>(
+                      BlocListener<ClientsBloc, ClientsState>(
                         listener: (context, state) {
-                          if (state is ClientIndexExtBlocStateLoaded) {
+                          if (state is ClientIdExtLoaded) {
                             id = state.idNuovo;
                             _idController.text = id.toString();
                           }
@@ -121,8 +118,9 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
                           onPressed: _formValid
                               ? () {
                                   client = client.copyWith(id: id);
-                                  BlocProvider.of<ClientsBloc>(context)
-                                      .add(AddClients(clients: client));
+                                  BlocProvider.of<ClientsBloc>(context).add(
+                                      ClientBlocEventAddClients(
+                                          clients: client));
 
                                   _clientRepository.save_id_external(id);
 
