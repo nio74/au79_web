@@ -54,15 +54,18 @@ class _PageRiparazioniState extends State<RiparazionePage> {
                   children: [
                     //EasyAutocomplete(),
                     // EasyAutocomplete(),
-                    BlocBuilder<ClientsBloc, ClientsState>(
-                        builder: (context, state) {
+                    BlocConsumer<ClientsBloc, ClientsState>(
+                        listener: (context, state) {
+                      if (state is ClientBlocStateIndexExtLoaded) {
+                        BlocProvider.of<ClientsBloc>(context)
+                            .add(ClientBlocEventInit());
+                      }
+                    }, builder: (context, state) {
                       if (state is ClientBlocStatesLoading) {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
                       } else {
-                        BlocProvider.of<ClientsBloc>(context)
-                            .add(const ClientBlocEventInit());
                         final clients =
                             (state as ClientsBlocStateLoaded).clients;
                         return EasyAutocomplete(

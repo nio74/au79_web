@@ -67,7 +67,6 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   Future<void> _onLoadId(
       ClientBlocLoadIdEvent event, Emitter<ClientsState> emit) async {
     var courrentState = (_clientRepository.readIdClient());
-
     emit(ClientBlocStateIndexExtLoaded(await courrentState));
   }
 }
