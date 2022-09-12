@@ -31,9 +31,9 @@ Future main() async {
       create: (_) => ClientsBloc(clientRepository: ClientRepository())
         ..add(const ClientBlocEventInit()),
     ),
-    BlocProvider(
+    /*  BlocProvider(
         create: (_) => ClientsBloc(clientRepository: ClientRepository())
-          ..add(ClientBlocLoadIdEvent()))
+          ..add(ClientBlocLoadIdEvent())) */
   ], child: const MyApp()));
 }
 

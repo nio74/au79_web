@@ -32,6 +32,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
   void initState() {
     //BlocProvider.of<ClientsBloc>(context).add(LoadIdEvent());
     //BlocProvider.of<ClientidnuovoBloc>(context).add(LoadIdExtEvent());
+    BlocProvider.of<ClientsBloc>(context).add(ClientBlocLoadIdEvent());
 
     super.initState();
   }
@@ -41,7 +42,7 @@ class _ClientsInsertPageState extends State<ClientsInsertPage> {
     _nameClientController.dispose();
     _addressController.dispose();
     _idController.dispose();
-
+    BlocProvider.of<ClientsBloc>(context).add(ClientBlocLoadIdEvent());
     super.dispose();
   }
 

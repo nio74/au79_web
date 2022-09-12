@@ -61,6 +61,8 @@ class _PageRiparazioniState extends State<RiparazionePage> {
                           child: CircularProgressIndicator(),
                         );
                       } else {
+                        BlocProvider.of<ClientsBloc>(context)
+                            .add(const ClientBlocEventInit());
                         final clients =
                             (state as ClientsBlocStateLoaded).clients;
                         return EasyAutocomplete(
