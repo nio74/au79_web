@@ -52,13 +52,11 @@ class _PageRiparazioniState extends State<RiparazionePage> {
               child: Form(
                 child: Column(
                   children: [
-                    //EasyAutocomplete(),
-                    // EasyAutocomplete(),
                     BlocConsumer<ClientsBloc, ClientsState>(
                         listener: (context, state) {
                       if (state is ClientBlocStateIndexExtLoaded) {
                         BlocProvider.of<ClientsBloc>(context)
-                            .add(ClientBlocEventInit());
+                            .add(const ClientBlocEventInit());
                       }
                     }, builder: (context, state) {
                       if (state is ClientBlocStatesLoading) {
