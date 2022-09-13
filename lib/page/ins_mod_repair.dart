@@ -188,7 +188,13 @@ class EasyAutocompleteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ClientsBloc, ClientsState>(
+    return BlocConsumer<ClientsBloc, ClientsState>(
+      listener: (context, state) {
+        if (state is ClientBlocStateIndexExtLoaded) {
+          BlocProvider.of<ClientsBloc>(context)
+              .add(const ClientBlocEventInit());
+        }
+      },
       builder: (context, state) {
         if (state is ClientBlocStatesLoading) {
           return const Center(
