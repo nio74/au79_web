@@ -165,6 +165,15 @@ class _InsModRepairState extends State<InsModRepair> {
               },
               suggestions: clients.map((e) => e.nameClient).toList(),
               onChanged: (value) {
+                if (value.length < 3) {
+                  print('devi inserire almeno tre caratteri');
+                }
+                if (value.length > 3 ||
+                    clients.map((e) => e.nameClient).contains(value)) {
+                  print('il valore  e presente nella lista');
+                } else {
+                  print('valore non e presente nella lista');
+                }
                 repair.copyWith(nameClient: value);
               });
         }
@@ -179,75 +188,5 @@ class _InsModRepairState extends State<InsModRepair> {
 
       return 'Inserire il nome del Cliente';
     }
-  }
-}
-
-class EasyAutocompleteWidget extends StatelessWidget {
-  EasyAutocompleteWidget({
-    required TextEditingController controller,
-    //required errorText,
-    required String txtLable,
-    Key? key,
-  })  : _controller = controller,
-        _txtLable = txtLable,
-        // _errorText = errorText,
-        super(key: key);
-
-  final TextEditingController _controller;
-  //final String? _errorText;
-  String _txtLable;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<ClientsBloc, ClientsState>(
-      listener: (context, state) {
-        if (state is ClientBlocStateIndexExtLoaded) {
-          BlocProvider.of<ClientsBloc>(context)
-              .add(const ClientBlocEventInit());
-        }
-      },
-      builder: (context, state) {
-        if (state is ClientBlocStatesLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          final clients = (state as ClientsBlocStateLoaded).clients;
-          return EasyAutocomplete(
-              controller: _controller,
-              decoration: InputDecoration(
-                  // errorText: _errorText,
-                  label: Text(_txtLable),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                          color: Theme.of(context).primaryColor,
-                          style: BorderStyle.solid)),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                          color: Theme.of(context).primaryColor,
-                          style: BorderStyle.solid))),
-              suggestionBuilder: (data) {
-                return Container(
-                    margin: const EdgeInsets.all(1),
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Text(data,
-                        style: Theme.of(context).textTheme.headline3));
-              },
-              suggestions: clients.map((e) => e.nameClient).toList(),
-              onChanged: (value) {
-                if (value.length > 3) {
-                  _txtLable = 'il campo non puo essere vuoto';
-                }
-              });
-        }
-      },
-    );
   }
 }
