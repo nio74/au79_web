@@ -7,9 +7,11 @@ abstract class RepairEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadRepairs extends RepairEvent {
+class RepairBlocLoadIdEvent extends RepairEvent {}
+
+class RepairBlocEventInit extends RepairEvent {
   final List<RepairModel> repairs;
-  const LoadRepairs({
+  const RepairBlocEventInit({
     this.repairs = const <RepairModel>[],
   });
 

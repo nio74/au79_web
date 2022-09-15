@@ -7,13 +7,21 @@ abstract class RepairState extends Equatable {
   List<Object> get props => [];
 }
 
-class RepairLoading extends RepairState {}
+class RepairBlocStateLoading extends RepairState {}
 
-class RepairLoaded extends RepairState {
+class RepairBlocStateLoaded extends RepairState {
   final List<RepairModel> repairs;
-  const RepairLoaded(
+  const RepairBlocStateLoaded(
       {this.repairs =
           const <RepairModel>[]}); // pass to costructor an empty lyst
   @override
   List<Object> get props => [repairs];
+}
+
+class RepairBlocStateIndexExtLoaded extends RepairState {
+  final int idNuovo;
+
+  const RepairBlocStateIndexExtLoaded(this.idNuovo);
+  @override
+  List<Object> get props => [idNuovo];
 }

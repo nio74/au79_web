@@ -1,4 +1,5 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
+import 'package:au79_web/bloc/repair/repair_bloc.dart';
 
 import 'package:au79_web/model/repair_model.dart';
 
@@ -22,9 +23,14 @@ class _InsModRepairState extends State<InsModRepair> {
   final TextEditingController _clientController = TextEditingController();
   final TextEditingController _objectController = TextEditingController();
   final TextEditingController _workTodoController = TextEditingController();
-
+  int id = 0;
   bool _formValid = false;
   bool autocomleteValid = false;
+  @override
+  void initState() {
+    BlocProvider.of<RepairBloc>(context).add(RepairBlocLoadIdEvent());
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -65,13 +71,18 @@ class _InsModRepairState extends State<InsModRepair> {
                       const SizedBox(
                         height: 10,
                       ),
-                      CustomTextFormField(
-                          controller: _codeController,
-                          txtLable: 'Codice',
-                          // initialValue: 'initialValue',
-                          onChanged: (value) {
-                            repair = repair.copyWith(code: int.parse(value));
-                          }),
+                      BlocListener<RepairBloc, RepairState>(
+                          listener: (context, state) {
+                            if (state is RepairBlocStateIndexExtLoaded) {
+                              id = state.idNuovo;
+                              _codeController.text = id.toString();
+                            }
+                          },
+                          child: CustomTextFormField(
+                            enable: false,
+                            controller: _codeController,
+                            txtLable: 'Codice',
+                          )),
                       const SizedBox(
                         height: 10,
                       ),

@@ -13,12 +13,14 @@ class RepairBloc extends Bloc<RepairEvent, RepairState> {
 
   RepairBloc({required RepairRepository repairRepository})
       : _repairRepository = repairRepository,
-        super(RepairLoading()) {
-    on<LoadRepairs>(_onLoadRepairs);
+        super(RepairBlocStateLoading()) {
+    on<RepairBlocEventInit>(_onLoadRepairs);
     on<UpdateRepairs>(_updateRepair);
+    on<RepairBlocLoadIdEvent>(_onLoadId);
   }
 
-  FutureOr<void> _onLoadRepairs(LoadRepairs event, Emitter<RepairState> emit) {
+  FutureOr<void> _onLoadRepairs(
+      RepairBlocEventInit event, Emitter<RepairState> emit) {
     _repairSubscription?.cancel();
     _repairSubscription = _repairRepository.getAllRepairs().listen(
           (products) => add(
@@ -28,8 +30,13 @@ class RepairBloc extends Bloc<RepairEvent, RepairState> {
   }
 
   FutureOr<void> _updateRepair(UpdateRepairs event, Emitter<RepairState> emit) {
-    if (state != RepairLoading) {
-      emit(RepairLoaded(repairs: event.repairs));
+    if (state != RepairBlocStateLoading) {
+      emit(RepairBlocStateLoaded(repairs: event.repairs));
     }
+  }
+
+  Future<void> _onLoadId(RepairEvent event, Emitter<RepairState> emit) async {
+    var courrentState = (_repairRepository.readIdRepairId());
+    emit(RepairBlocStateIndexExtLoaded(await courrentState));
   }
 }

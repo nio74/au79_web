@@ -18,4 +18,20 @@ class RepairRepository extends RepairBaserepository {
       return risultato;
     });
   }
+
+  Future<int> readIdRepairId() async {
+    var risultato;
+    final result = await _firebaseFirestore
+        .collection('repairsId')
+        .doc('i3XTlDCuIRmFCgrMIe6A')
+        .get();
+
+    Map<String, dynamic>? data = result.data();
+
+    data?.forEach((key, value) {
+      print('qusta la chiave $key e questo il valore $value');
+      risultato = value + 1;
+    });
+    return risultato;
+  }
 }

@@ -18,19 +18,19 @@ class DataTableRepairWidget extends StatelessWidget {
     //final blocRiparazioni = ListaRiparazioniBloc();
 
     return BlocBuilder<RepairBloc, RepairState>(builder: (context, state) {
-      if (state is RepairLoading) {
+      if (state is RepairBlocStateLoading) {
         return const Center(
           child: CircularProgressIndicator(),
         );
       } else {
-        final repairs = (state as RepairLoaded).repairs;
+        final repairs = (state as RepairBlocStateLoaded).repairs;
         return SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: DataTable(
               columns: const [
-                DataColumn(label: Text('code')),
-                DataColumn(label: Text('Object')),
-                DataColumn(label: Text('Work to do')),
+                DataColumn(label: Text('codice')),
+                DataColumn(label: Text('Oggetti')),
+                DataColumn(label: Text('Richiesta Lavorazione')),
               ],
               rows: repairs
                   .map<DataRow>((element) => DataRow(cells: [

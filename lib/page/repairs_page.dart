@@ -35,8 +35,6 @@ class _PageRiparazioniState extends State<RiparazionePage> {
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/ins_mod_repair');
-                      /*  ClientRepository rep = ClientRepository();
-                      rep.createClient(); */
                     },
                     child: const Text('INSERT')),
               ),

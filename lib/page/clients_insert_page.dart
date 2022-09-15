@@ -18,13 +18,13 @@ class ClientsInsertPage extends StatefulWidget {
 class _ClientsInsertPageState extends State<ClientsInsertPage> {
   final _clientRepository = ClientRepository();
   final _formKey = GlobalKey<FormState>();
-  int id = 0;
+
   final TextEditingController _idController = TextEditingController();
 
   final TextEditingController _nameClientController = TextEditingController();
 
   final TextEditingController _addressController = TextEditingController();
-
+  int id = 0;
   bool _formValid = false;
   bool autocomleteValid = false;
 
