@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
 import 'package:au79_web/bloc/repair/repair_bloc.dart';
 
@@ -25,11 +27,15 @@ class _InsModRepairState extends State<InsModRepair> {
   final TextEditingController _workTodoController = TextEditingController();
   int id = 0;
   bool _formValid = false;
+  bool _ceck = false;
   bool autocomleteValid = false;
+  FocusNode _focusNodeId = FocusNode();
   @override
   void initState() {
+    BlocProvider.of<ClientsBloc>(context).add(ClientBlocEventInit());
     BlocProvider.of<RepairBloc>(context).add(RepairBlocLoadIdEvent());
     super.initState();
+    _focusNodeId.addListener(() => _checkId());
   }
 
   @override
@@ -37,6 +43,10 @@ class _InsModRepairState extends State<InsModRepair> {
     _clientController.dispose();
     _objectController.dispose();
     _workTodoController.dispose();
+    _focusNodeId.dispose();
+    //BlocProvider.of<ClientsBloc>(context).add(ClientBlocEventInit());
+    // BlocProvider.of<ClientsBloc>(context).add(ClientBlocLoadIdEvent());
+    // BlocProvider.of<RepairBloc>(context).add(RepairBlocLoadIdEvent());
     super.dispose();
   }
 
@@ -164,15 +174,37 @@ class _InsModRepairState extends State<InsModRepair> {
                         style: Theme.of(context).textTheme.headline3));
               },
               suggestions: clients.map((e) => e.nameClient).toList(),
+              focusNode: _focusNodeId,
               onChanged: (value) {
-                if (value.length < 3) {
-                  print('devi inserire almeno tre caratteri');
-                }
+                // if (value.length < 3 || _clientController.text.l) {}
                 if (value.length > 3 ||
                     clients.map((e) => e.nameClient).contains(value)) {
                   print('il valore  e presente nella lista');
-                } else {
-                  print('valore non e presente nella lista');
+                }
+                if (value.length > 3 &&
+                    !clients.map((e) => e.nameClient).contains(value) &&
+                    _ceck == false) {
+                  print('il valore non e presente nella lista devi inserirlo');
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                            title: const Text(
+                                'Cliente non trovato vuoi registrarlo?'),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    _ceck = true;
+                                  },
+                                  child: const Text('NO')),
+                              TextButton(
+                                  onPressed: (() {
+                                    Navigator.pushNamed(
+                                        context, '/clients_page');
+                                  }),
+                                  child: const Text('SI'))
+                            ],
+                          ));
                 }
                 repair.copyWith(nameClient: value);
               });
@@ -187,6 +219,13 @@ class _InsModRepairState extends State<InsModRepair> {
       _formValid = false;
 
       return 'Inserire il nome del Cliente';
+    }
+  }
+
+  _checkId() {
+    if (!_focusNodeId.hasFocus) {
+      var lunghezza = _clientController.text.length;
+      print(' o $lunghezza');
     }
   }
 }
