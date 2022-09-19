@@ -14,7 +14,7 @@ class ClientRepository extends ClientBaseRepository {
     return _firebaseFirestore.collection('clients').snapshots().map((snapshot) {
       final risultato =
           snapshot.docs.map((doc) => ClientModel.fromSnapshot(doc)).toList();
-      print(risultato);
+      //   print(risultato);
 
       return risultato;
     });
@@ -66,7 +66,7 @@ class ClientRepository extends ClientBaseRepository {
     Map<String, dynamic>? data = result.data();
 
     data?.forEach((key, value) {
-      print('qusta la chiave $key e questo il valore $value');
+      //  print('qusta la chiave $key e questo il valore $value');
       risultato = value + 1;
     });
     return risultato;

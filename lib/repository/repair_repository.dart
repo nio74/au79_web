@@ -13,7 +13,7 @@ class RepairRepository extends RepairBaserepository {
     return _firebaseFirestore.collection('repairs').snapshots().map((snapshot) {
       final risultato =
           snapshot.docs.map((doc) => RepairModel.fromSnapshot(doc)).toList();
-      print(risultato);
+      //  print(risultato);
 
       return risultato;
     });
