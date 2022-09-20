@@ -24,15 +24,12 @@ Future main() async {
 
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
-        create: (_) => RepairBloc(repairRepository: RepairRepository())
-          ..add(const RepairBlocEventInit())),
+        create: (_) => RepairBloc(repairRepository: RepairRepository())),
     BlocProvider(
-      create: (_) => ClientsBloc(clientRepository: ClientRepository())
-        ..add(const ClientBlocEventInit()),
+      create: (_) => ClientsBloc(clientRepository: ClientRepository()),
     ),
-    /*  BlocProvider(
-        create: (_) => ClientsBloc(clientRepository: ClientRepository())
-          ..add(ClientBlocLoadIdEvent())) */
+    BlocProvider(
+        create: (_) => ClientsBloc(clientRepository: ClientRepository()))
   ], child: const MyApp()));
 }
 
