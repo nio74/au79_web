@@ -48,6 +48,7 @@ class _MyAppState extends State<MyApp> {
     /* final virtualWindowFrameBuilder = VirtualWindowFrameInit();
     final botToastBuilder = BotToastInit(); */
     return MaterialApp(
+
       debugShowCheckedModeBanner: false,
       title: 'Au79',
       theme: lightThemeData,

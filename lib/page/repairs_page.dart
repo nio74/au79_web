@@ -16,8 +16,8 @@ class RiparazionePage extends StatefulWidget {
 class _PageRiparazioniState extends State<RiparazionePage> {
   @override
   void initState() {
-    BlocProvider.of<RepairBloc>(context).add(RepairBlocEventInit());
-    BlocProvider.of<ClientsBloc>(context).add(ClientBlocEventInit());
+    BlocProvider.of<RepairBloc>(context).add(const RepairBlocEventInit());
+    BlocProvider.of<ClientsBloc>(context).add(const ClientBlocEventInit());
     super.initState();
   }
 
