@@ -32,8 +32,8 @@ class _InsModRepairState extends State<InsModRepair> {
   FocusNode _focusNodeId = FocusNode();
   @override
   void initState() {
-    BlocProvider.of<ClientsBloc>(context).add(ClientBlocEventInit());
-    BlocProvider.of<RepairBloc>(context).add(RepairBlocLoadIdEvent());
+    BlocProvider.of<ClientsBloc>(context).add(ClientBlocLoadIdEvent());
+    // BlocProvider.of<RepairBloc>(context).add(RepairBlocLoadIdEvent());
     super.initState();
     _focusNodeId.addListener(() => _checkId());
   }
@@ -81,9 +81,9 @@ class _InsModRepairState extends State<InsModRepair> {
                       const SizedBox(
                         height: 10,
                       ),
-                      BlocListener<RepairBloc, RepairState>(
+                      BlocListener<ClientsBloc, ClientsState>(
                           listener: (context, state) {
-                            if (state is RepairBlocStateIndexExtLoaded) {
+                            if (state is ClientBlocStateIndexExtLoaded) {
                               id = state.idNuovo;
                               _codeController.text = id.toString();
                             }
@@ -124,7 +124,12 @@ class _InsModRepairState extends State<InsModRepair> {
                         height: 10,
                       ),
                       ElevatedButton(
-                          onPressed: _formValid ? () {} : null,
+                          onPressed: _formValid
+                              ? () {
+                                  repair = repair.copyWith(code: id);
+                                  //BlocProvider.of<RepairBloc>(context).add(Re)
+                                }
+                              : null,
                           child: const Text('SALVA')),
                     ],
                   ),

@@ -30,12 +30,13 @@ class RepairBloc extends Bloc<RepairEvent, RepairState> {
   }
 
   FutureOr<void> _updateRepair(UpdateRepairs event, Emitter<RepairState> emit) {
-    if (state != RepairBlocStateLoading) {
+    if (state is RepairBlocStateLoading) {
       emit(RepairBlocStateLoaded(repairs: event.repairs));
     }
   }
 
   Future<void> _onLoadId(RepairEvent event, Emitter<RepairState> emit) async {
+    emit(RepairBlocStateLoading());
     var courrentState = (_repairRepository.readIdRepairId());
     emit(RepairBlocStateIndexExtLoaded(await courrentState));
   }

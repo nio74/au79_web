@@ -2,6 +2,7 @@ import 'package:au79_web/page/clients_insert_page.dart';
 import 'package:au79_web/page/home_page.dart';
 import 'package:au79_web/page/impostazioni_page.dart';
 import 'package:au79_web/page/ins_mod_repair.dart';
+import 'package:au79_web/page/log_in.dart';
 
 import 'package:au79_web/page/repairs_page.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class RouteGeneretor {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(builder: (_) => Login_page());
       case '/riparazioni':
         return MaterialPageRoute(builder: (_) => RiparazionePage());
       case '/impostazioni':

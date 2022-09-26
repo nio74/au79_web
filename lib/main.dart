@@ -1,6 +1,7 @@
 import 'package:au79_web/bloc/clients/clients_bloc.dart';
 import 'package:au79_web/bloc/repair/repair_bloc.dart';
 import 'package:au79_web/page/home_page.dart';
+import 'package:au79_web/page/log_in.dart';
 import 'package:au79_web/repository/client_repository.dart';
 import 'package:au79_web/repository/repair_repository.dart';
 import 'package:au79_web/route/route_generator.dart';
@@ -48,7 +49,6 @@ class _MyAppState extends State<MyApp> {
     /* final virtualWindowFrameBuilder = VirtualWindowFrameInit();
     final botToastBuilder = BotToastInit(); */
     return MaterialApp(
-
       debugShowCheckedModeBanner: false,
       title: 'Au79',
       theme: lightThemeData,
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       themeMode: _themeMode,
       initialRoute: '/',
       onGenerateRoute: RouteGeneretor.generateRoute,
-      home: HomePage(),
+      home: Login_page(),
     );
   }
 }

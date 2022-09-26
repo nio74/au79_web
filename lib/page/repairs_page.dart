@@ -14,6 +14,8 @@ class RiparazionePage extends StatefulWidget {
 }
 
 class _PageRiparazioniState extends State<RiparazionePage> {
+
+
   @override
   void initState() {
     BlocProvider.of<RepairBloc>(context).add(const RepairBlocEventInit());
@@ -54,16 +56,20 @@ class _PageRiparazioniState extends State<RiparazionePage> {
                   children: [
                     BlocConsumer<ClientsBloc, ClientsState>(
                         listener: (context, state) {
-                      if (state is! ClientsBlocStateLoaded) {
-                        BlocProvider.of<ClientsBloc>(context)
-                            .add(const ClientBlocEventInit());
+                          print('Stampa Stato prima dell if $state');
+                      if (state is ClientBlocStatesLoading) {
+
+                        context.read<ClientsBloc>().add(ClientBlocEventInit());
+
+
                       }
                     }, builder: (context, state) {
                       if (state is ClientBlocStatesLoading) {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
-                      } else {
+                      }
+                      else {
                         final clients =
                             (state as ClientsBlocStateLoaded).clients;
                         return EasyAutocomplete(
