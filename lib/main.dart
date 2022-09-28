@@ -10,18 +10,14 @@ import 'package:au79_web/themes/light_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'firebase_options.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      options: const FirebaseOptions(
-          apiKey: "AIzaSyC4rNUMf6aXDzwgwaW_S3Nh93z_tYdn1wI",
-          authDomain: "au79web.firebaseapp.com",
-          projectId: "au79web",
-          storageBucket: "au79web.appspot.com",
-          messagingSenderId: "122206798164",
-          appId: "1:122206798164:web:913b7627a3c3064f7288c1",
-          measurementId: "G-SM21S8496E"));
+
+  //Firebase cli method https://firebase.flutter.dev/docs/cli/
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
