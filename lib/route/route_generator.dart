@@ -13,7 +13,7 @@ class RouteGeneretor {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => Login_page());
+        return MaterialPageRoute(builder: (_) => LoginPage());
       case '/riparazioni':
         return MaterialPageRoute(builder: (_) => RiparazionePage());
       case '/impostazioni':

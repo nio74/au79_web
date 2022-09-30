@@ -10,6 +10,7 @@ import 'package:au79_web/themes/light_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'firebase_options.dart';
 
 Future main() async {
@@ -44,7 +45,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     /* final virtualWindowFrameBuilder = VirtualWindowFrameInit();
     final botToastBuilder = BotToastInit(); */
-    return MaterialApp(
+    return GetMaterialApp(
+      //here I use Getx
       debugShowCheckedModeBanner: false,
       title: 'Au79',
       theme: lightThemeData,
@@ -52,7 +54,7 @@ class _MyAppState extends State<MyApp> {
       themeMode: _themeMode,
       initialRoute: '/',
       onGenerateRoute: RouteGeneretor.generateRoute,
-      home: Login_page(),
+      home: LoginPage(),
     );
   }
 }

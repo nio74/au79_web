@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 import 'package:au79_web/model/client_model.dart';
 import 'package:au79_web/repository/client_repository.dart';
@@ -66,7 +68,6 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
 
   Future<void> _onLoadId(
       ClientBlocLoadIdEvent event, Emitter<ClientsState> emit) async {
-
     var courrentState = (_clientRepository.readIdClient());
     emit(ClientBlocStateIndexExtLoaded(await courrentState));
     emit(ClientBlocStatesLoading());
