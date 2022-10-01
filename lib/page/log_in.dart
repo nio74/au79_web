@@ -368,7 +368,7 @@ class _WideLayoutState extends State<WideLayout> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const  BoxDecoration(
+      decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage('assets/images/93252.jpg'), fit: BoxFit.cover)),
       child: Row(
@@ -378,8 +378,7 @@ class _WideLayoutState extends State<WideLayout> {
             child: Container(
               child: Text(
                 'ENTRA IN GESTIONE RIPARAZIONI',
-                style: TextStyle(fontFamily: 
-                
+                style: Theme.of(context).textTheme.headline1,
               ),
             ),
           ),
