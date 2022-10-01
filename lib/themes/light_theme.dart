@@ -13,7 +13,7 @@ var lightThemeData = ThemeData(
 
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-        primary: Colors.green,
+        backgroundColor: Color(0xff416ff4),
         textStyle: const TextStyle(fontFamily: 'Futura'),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))),
