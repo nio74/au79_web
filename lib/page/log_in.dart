@@ -376,9 +376,11 @@ class _WideLayoutState extends State<WideLayout> {
           Expanded(
             flex: 3,
             child: Container(
-              child: Text(
-                'ENTRA IN GESTIONE RIPARAZIONI',
-                style: Theme.of(context).textTheme.headline1,
+              child: const Text(
+                'Au79Repairs',
+                style: TextStyle(
+                    color: Colors.cyan, fontFamily: 'PT Serif', fontSize: 80),
+                textAlign: TextAlign.right,
               ),
             ),
           ),
@@ -415,6 +417,19 @@ class _WideLayoutState extends State<WideLayout> {
                     const CustomTextFormField(txtLable: 'Password'),
                     const SizedBox(
                       height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: Container()),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: Text('Hai dimenticato la password?',
+                              style: Theme.of(context).textTheme.headline6),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 30,
                     ),
                     const ElevatedButton(onPressed: null, child: Text('Entra'))
                   ]),
