@@ -12,14 +12,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'firebase_options.dart';
+/*
 
+---------------------------------------
+I have deactivate firebase
+---------------------------------------
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   //Firebase cli method https://firebase.flutter.dev/docs/cli/
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+*/
 
+main() {
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
         create: (_) => RepairBloc(repairRepository: RepairRepository())),

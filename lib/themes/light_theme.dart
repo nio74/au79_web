@@ -9,7 +9,7 @@ var lightThemeData = ThemeData(
   colorScheme: const ColorScheme.light(
       primary: Color(0xff416ff4), secondary: Color(0xFFe84545)),
   backgroundColor: const Color(0xFFFFFFFF),
-  fontFamily: 'Futura',
+  fontFamily: 'PT Serif',
 
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -23,7 +23,7 @@ var lightThemeData = ThemeData(
     headline1: TextStyle(
       color: Color(0xFF2b2e4a),
       fontWeight: FontWeight.bold,
-      fontSize: 36,
+      fontSize: 48,
     ),
     headline2: TextStyle(
       color: Color(0xFF2b2e4a),
@@ -48,7 +48,7 @@ var lightThemeData = ThemeData(
     headline6: TextStyle(
       color: Color(0xFF2b2e4a),
       fontWeight: FontWeight.normal,
-      fontSize: 14,
+      fontSize: 13,
     ),
     bodyText1: TextStyle(
       color: Color(0xFF2b2e4a),
